@@ -1,0 +1,32 @@
+package io.github.krevik.kathairis.item;
+
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.IItemTier;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.SwordItem;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
+import net.minecraft.potion.Potion;
+
+/**
+ * @author Krevik
+ */
+public class ItemMagnethiumSword extends ItemKathairisSword {
+
+	public ItemMagnethiumSword(IItemTier tier, ItemGroup group) {
+		super(tier);
+	}
+
+	@Override
+	public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity entityLivingBase) {
+		stack.damageItem(1, entityLivingBase, (p_220045_0_) -> {
+			p_220045_0_.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+		});
+		target.addPotionEffect(new EffectInstance(Effects.LEVITATION, 25, 1));
+		return true;
+	}
+
+}
