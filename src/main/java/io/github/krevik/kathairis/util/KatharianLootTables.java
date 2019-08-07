@@ -1,13 +1,16 @@
 package io.github.krevik.kathairis.util;
 
 
+import com.google.common.collect.Sets;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraft.world.storage.loot.LootTables;
+
+import java.util.Set;
 
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 
 public class KatharianLootTables {
+   /*
     public static ResourceLocation LOOT_LIVINGFLOWER = LootTables.register(new ResourceLocation(MOD_ID+":"+"livingflower"));
     public static ResourceLocation LOOT_MYSTICBIRD = LootTables.register(new ResourceLocation(MOD_ID+":"+"mysticbird"));
     public static ResourceLocation LOOT_HOWLER = LootTableList.register(new ResourceLocation(MOD_ID+":"+"howler"));
@@ -29,6 +32,6 @@ public class KatharianLootTables {
     public static ResourceLocation LOOT_GECKO = LootTableList.register(new ResourceLocation(MOD_ID+":"+"gecko"));
     public static ResourceLocation LOOT_GAZNOWEL = LootTableList.register(new ResourceLocation(MOD_ID+":"+"gaznowel"));
     public static ResourceLocation LOOT_CACTISPORE = LootTableList.register(new ResourceLocation(MOD_ID+":"+"cacti_spore"));
-    public static ResourceLocation LOOT_PHASM = LootTableList.register(new ResourceLocation(MOD_ID+":"+"phasm"));
+    public static ResourceLocation LOOT_PHASM = LootTableList.register(new ResourceLocation(MOD_ID+":"+"phasm"));*/
 
 }

@@ -263,7 +263,7 @@ public final class ModEventSubscriber {
 				setup(new BlockNamedItem(ModBlocks.GOOSEBERRY_BUSH, new Item.Properties().food(ModFoods.GOOSEBERRY).group(ModItemGroups.FOOD)), "gooseberries"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS)), "venom_sac"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS)), "glass_jar"),
-				setup(new Item(new Item.Properties().group(ModItemGroups.FOOD)), "nectar_bowl"),
+				setup(new Item(new Item.Properties().group(ModItemGroups.FOOD).food(ModFoods.NECTAR_BOWL)), "nectar_bowl"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(Rarity.COMMON)), "butterfly_common_1"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(Rarity.COMMON)), "butterfly_common_2"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(Rarity.COMMON)), "butterfly_common_moth"),
@@ -271,7 +271,7 @@ public final class ModEventSubscriber {
 				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS).rarity(Rarity.RARE)), "butterfly_cloud_shimmer"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS)), "butterfly_catcher"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.MISCELLANEOUS)), "wings_piece"),
-				setup(new Item(new Item.Properties().group(ModItemGroups.FOOD)), "fungal_drug"),
+				setup(new Item(new Item.Properties().group(ModItemGroups.FOOD).food(ModFoods.FUNGAL_DRUG)), "fungal_drug"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.FOOD)), "bitten_cookie"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.FOOD)), "candy_cane"),
 				setup(new Item(new Item.Properties().group(ModItemGroups.FOOD)), "christmas_chocolate"),
@@ -285,7 +285,7 @@ public final class ModEventSubscriber {
 				setup(new ItemKathairisHoe(ModItemTiers.MAGNETHIUM), "magnethium_hoe"),
 				setup(new ItemKathairisPickaxe(ModItemTiers.CRYSTAL), "crystal_pickaxe"),
 				setup(new BlockNamedItem(ModBlocks.FRUP_PLANT, new Item.Properties().food(ModFoods.FRUP).group(ModItemGroups.FOOD)), "frup"),
-				setup(new BlockNamedItem(ModBlocks.MAGIC_BEANS, new Item.Properties().food(ModFoods.FRUP).group(ModItemGroups.FOOD)), "magic_beans"),
+				setup(new BlockNamedItem(ModBlocks.MAGIC_BEANS, new Item.Properties().food(ModFoods.MAGIC_BEANS).group(ModItemGroups.FOOD)), "magic_beans"),
 				setup(new ItemMysticWand(ModItemGroups.WEAPONS),"mystic_wand"),
 				setup(new BlockNamedItem(ModBlocks.BRINE_PUSTULE, new Item.Properties().food(ModFoods.MINERAL_FRUIT).group(ModItemGroups.FOOD)),"mineral_fruit")
 		);

@@ -226,13 +226,6 @@ public class EntitySkyray extends FlyingEntity
         return false;
     }
 
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_SKYRAY;
-    }
-
 
     @Override
     public void livingTick() {

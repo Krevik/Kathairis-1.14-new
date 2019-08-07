@@ -41,6 +41,7 @@ public class KathairisTeleportingManager {
         }
     }
 
+
     public static void changeDim(Entity entity, BlockPos pos, DimensionType type) {
         if (!ForgeHooks.onTravelToDimension(entity, type)) return;
         DimensionType dimensiontype = entity.dimension;
@@ -67,7 +68,7 @@ public class KathairisTeleportingManager {
             entity.setWorld(serverworld1);
             serverworld1.func_217447_b(((ServerPlayerEntity) entity));
             TeleporterKathairis teleporter = new TeleporterKathairis(serverworld1);
-            teleporter.placeEntity(serverworld1, entity, f1);
+            //teleporter.placeEntity(serverworld1, entity, f1);
             teleporter.func_222268_a(entity, f1);
             ((ServerPlayerEntity) entity).interactionManager.setWorld(serverworld1);
             ((ServerPlayerEntity) entity).connection.sendPacket(new SPlayerAbilitiesPacket(((ServerPlayerEntity) entity).abilities));

@@ -141,9 +141,9 @@ public class BasicKatharianParticle extends Particle {
         if (particleAngle != 0.0F) {
             float angleInterp = particleAngle + (particleAngle - prevParticleAngle) * partialTicks;
             float f9 = MathHelper.cos(angleInterp * 0.5F);
-            float xComponent = MathHelper.sin(angleInterp * 0.5F) * (float) cameraViewDir.x;
-            float yComponent = MathHelper.sin(angleInterp * 0.5F) * (float) cameraViewDir.y;
-            float zComponent = MathHelper.sin(angleInterp * 0.5F) * (float) cameraViewDir.z;
+            float xComponent = MathHelper.sin(angleInterp * 0.5F) * (float) interpPosX;
+            float yComponent = MathHelper.sin(angleInterp * 0.5F) * (float) interpPosY;
+            float zComponent = MathHelper.sin(angleInterp * 0.5F) * (float) interpPosZ;
             Vec3d vec3d = new Vec3d(xComponent, yComponent, zComponent);
 
             for (int l = 0; l < 4; ++l) {

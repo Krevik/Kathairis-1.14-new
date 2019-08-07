@@ -43,12 +43,7 @@ public class BlockJadeVines extends BlockKathairisPlant {
 	}
 
 	@Override
-	public boolean isFullCube(BlockState state) {
-		return false;
-	}
-
-	@Override
-	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
 		if (!worldIn.isRemote) {
 			handleVariantsAndCanBlockBeHere(worldIn, pos, state);
 			if (worldIn.isAirBlock(pos.up())) {

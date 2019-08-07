@@ -7,8 +7,8 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.FallingBlockEntity;
-import net.minecraft.init.Particles;
 import net.minecraft.particles.BlockParticleData;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -71,7 +71,7 @@ public class BlockSoftSand extends Block {
 				double d0 = (double) ((float) pos.getX() + rand.nextFloat());
 				double d1 = (double) pos.getY() - 0.05D;
 				double d2 = (double) ((float) pos.getZ() + rand.nextFloat());
-				worldIn.addParticle(new BlockParticleData(Particles.FALLING_DUST, stateIn), d0, d1, d2, 0.0D, 0.0D, 0.0D);
+				worldIn.addParticle(new BlockParticleData(ParticleTypes.FALLING_DUST, stateIn), d0, d1, d2, 0.0D, 0.0D, 0.0D);
 			}
 		}
 

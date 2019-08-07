@@ -316,10 +316,4 @@ public class EntityCloudySlime extends TameableEntity
         this.setVariant(compound.getInt("Variant"));
     }
 
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_CLOUDYSLIME;
-    }
 }

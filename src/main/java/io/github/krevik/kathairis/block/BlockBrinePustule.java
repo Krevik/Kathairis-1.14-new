@@ -122,13 +122,9 @@ public class BlockBrinePustule extends BlockKathairisPlant implements IGrowable 
         return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
     }
 
-    @Override
-    public boolean isFullCube(BlockState state) {
-        return false;
-    }
 
     @Override
-    public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+    public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
         handleFacing(state, worldIn, pos);
         if (!this.isStoneAround(worldIn, pos)) {
             this.dropBlock(worldIn, pos, state);

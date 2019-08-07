@@ -57,11 +57,5 @@ public class EntityFungite extends CreatureEntity
         return CreatureAttribute.UNDEFINED;
     }
 
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_FUNGITE;
-    }
 
 }

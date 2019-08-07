@@ -87,12 +87,6 @@ public class EntityCamel extends AbstractHorseEntity
     }
 
     @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_CAMEL;
-    }
-
-    @Override
     public boolean canMateWith(AnimalEntity otherAnimal)
     {
     	return false;

@@ -80,10 +80,4 @@ public class EntityMothBase extends EntityBasicButterfly
         return true;
     }
 
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_BUTTERFLY;
-    }
 }

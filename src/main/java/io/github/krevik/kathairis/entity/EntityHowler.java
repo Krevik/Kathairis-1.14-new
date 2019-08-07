@@ -199,7 +199,8 @@ public class EntityHowler extends CreatureEntity
     @Override
     protected ResourceLocation getLootTable()
     {
-        return KatharianLootTables.LOOT_HOWLER;
+        return null;
+        //return KatharianLootTables.LOOT_HOWLER;
     }
 
 

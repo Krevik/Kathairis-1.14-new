@@ -43,9 +43,11 @@ public class EntityBison extends EntityKatharianAnimal
         this.experienceValue=30;
     }
 
-    public EntityBison(EntityType<? extends LivingEntity> type, World world) {
-        super((EntityType<? extends AnimalEntity>) type, world);
+
+    public EntityBison(EntityType<EntityBison> entityBisonEntityType, World world) {
+        super(entityBisonEntityType, world);
     }
+
 
     @Override
     public boolean canSpawn(IWorld world, SpawnReason sth) {
@@ -163,11 +165,6 @@ public class EntityBison extends EntityKatharianAnimal
         return super.attackEntityFrom(source, amount);
     }
 
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-    	return KatharianLootTables.LOOT_BISON;
-    }
 
     @Override
     public boolean processInteract(PlayerEntity player, Hand hand)

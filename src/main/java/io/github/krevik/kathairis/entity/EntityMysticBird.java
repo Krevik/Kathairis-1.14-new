@@ -276,11 +276,4 @@ public class EntityMysticBird extends AmbientEntity
 
     }
 
-
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_MYSTICBIRD;
-    }
 }

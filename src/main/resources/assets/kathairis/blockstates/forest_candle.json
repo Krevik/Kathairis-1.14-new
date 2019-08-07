@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"variant=bottom": { "model": "kathairis:block/forest_candle" },
+		"variant=upper": { "model": "kathairis:block/air" }
+	}
+}

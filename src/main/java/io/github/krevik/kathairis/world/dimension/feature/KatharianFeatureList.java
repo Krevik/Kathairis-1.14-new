@@ -21,7 +21,7 @@ public class KatharianFeatureList {
 
     public static final int mini_Cloud_Temple_Chance = 350;
 
-    public static final WorldCarver<ProbabilityConfig> KATHARIAN_CAVE_WORLD_CARVER = new KatharianWorldCaveCarver();
+    public static final WorldCarver<ProbabilityConfig> KATHARIAN_CAVE_WORLD_CARVER = new KatharianWorldCaveCarver(ProbabilityConfig::deserialize,256);
 
 
     public static final AbstractTreeFeature<NoFeatureConfig> KATHARIAN_TREE = registerFeature("katharian_tree", new KatharianTreeFeature(NoFeatureConfig::deserialize,true));

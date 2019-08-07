@@ -137,12 +137,6 @@ public class EntityCactiSpore extends CreatureEntity
         return CreatureAttribute.UNDEFINED;
     }
 
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_CACTISPORE;
-    }
 
     @Override
     public void writeAdditional(CompoundNBT compound)

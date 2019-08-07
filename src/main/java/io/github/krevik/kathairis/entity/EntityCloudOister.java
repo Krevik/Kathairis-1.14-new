@@ -158,13 +158,6 @@ public class EntityCloudOister extends AmbientEntity
         return EnumCreatureAttribute.UNDEFINED;
     }*/
 
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_CLOUDOISTER;
-    }
-
     @Override
     public boolean attackEntityAsMob(Entity entityIn)
     {

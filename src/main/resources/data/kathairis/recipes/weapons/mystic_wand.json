@@ -1,0 +1,22 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "  X",
+    " # ",
+    "Y  "
+  ],
+  "key": {
+    "#": {
+      "item": "kathairis:shiny_stick"
+    },
+    "X": {
+      "item": "kathairis:mystic_gem"
+    },
+	"Y": {
+      "item": "kathairis:howler_fur"
+    }
+  },
+  "result": {
+    "item": "kathairis:mystic_wand"
+  }
+}

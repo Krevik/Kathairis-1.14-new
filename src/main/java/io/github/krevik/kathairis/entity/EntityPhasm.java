@@ -212,13 +212,6 @@ public class EntityPhasm extends FlyingEntity implements IMob {
         this.getDataManager().register(SWINGING_ARMS, Boolean.valueOf(false));
     }
 
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_PHASM;
-    }
-
     @Override
     public int getMaxSpawnedInChunk()
     {

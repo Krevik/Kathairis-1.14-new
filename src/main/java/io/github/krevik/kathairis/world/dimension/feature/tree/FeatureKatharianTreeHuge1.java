@@ -4,10 +4,12 @@ import com.mojang.datafixers.Dynamic;
 import io.github.krevik.kathairis.block.BlockGlowVines;
 import io.github.krevik.kathairis.init.ModBlocks;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.gen.IWorldGenerationBaseReader;
 import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
@@ -85,13 +87,52 @@ public class FeatureKatharianTreeHuge1 extends AbstractKatharianTreeFeature {
                 for(int z=-2;z<=2;z++){
                     if(random.nextInt(6)==0){
                         BlockPos tmp = new BlockPos(pos.getX()+x,pos.getY()+y,pos.getZ()+z);
-                        if(isAir(world,tmp)&& BlockGlowVines.canPlaceBlockAtStatic(world,tmp)){
+                        if(isAir(world,tmp)&& canPlaceVinesAt(world,tmp)){
                             world.setBlockState(tmp,ModBlocks.GLOWVINES.getDefaultState(),3);
                         }
                     }
                 }
             }
         }
+    }
+
+    public boolean canPlaceVinesAt(IWorldGenerationReader worldIn, BlockPos pos) {
+        boolean can = false;
+        if (!isAir(worldIn,pos.east()) && !isAlreadyVine(worldIn,pos.east())) {
+            can = true;
+        }
+        if (!isAir(worldIn,pos.west()) && !isAlreadyVine(worldIn,pos.west())) {
+            can = true;
+        }
+        if (!isAir(worldIn,pos.south()) && !isAlreadyVine(worldIn,pos.south())) {
+            can = true;
+        }
+        if (!isAir(worldIn,pos.north()) && !isAlreadyVine(worldIn,pos.north())) {
+            can = true;
+        }
+        if (!isAir(worldIn,pos.up())) {
+            if (isAlreadyVine(worldIn,pos.up())) {
+                boolean isBottomVariant = worldIn.hasBlockState(pos.up(), (p_214583_0_) -> {
+                    if(p_214583_0_.has(BlockGlowVines.VARIANT)){
+                        if(p_214583_0_.get(BlockGlowVines.VARIANT)==BlockGlowVines.EnumType.BOTTOM){
+                            return true;
+                        }else{
+                            return false;
+                        }
+                    }else{
+                        return false;
+                    }
+                });
+                can = !isBottomVariant;
+            }
+        }
+        return can;
+    }
+
+    protected static boolean isAlreadyVine(IWorldGenerationBaseReader worldIn, BlockPos pos) {
+        return worldIn.hasBlockState(pos, (p_214583_0_) -> {
+            return p_214583_0_.getBlock() == ModBlocks.GLOWVINES;
+        });
     }
 
     private void makeRoot(IWorldGenerationReader world, BlockPos pos, Random rand, boolean canIncreaseX, boolean canIncreaseZ){

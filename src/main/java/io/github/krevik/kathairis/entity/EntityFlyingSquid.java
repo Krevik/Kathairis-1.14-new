@@ -151,12 +151,6 @@ public class EntityFlyingSquid extends FlyingEntity
         return false;
     }
 
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_FLYINGSQUID;
-    }
 
     public int animTravelTime=0;
     public int animTravelTime2=0;

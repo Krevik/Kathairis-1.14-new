@@ -92,12 +92,7 @@ public class BlockFluoFungi extends BlockKathairisPlant {
 	}
 
 	@Override
-	public boolean isFullCube(BlockState state) {
-		return false;
-	}
-
-	@Override
-	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
 		handleFacing(state, worldIn, pos);
 		if (!this.isLogAround(worldIn, pos)) {
 			this.dropBlock(worldIn, pos, state);

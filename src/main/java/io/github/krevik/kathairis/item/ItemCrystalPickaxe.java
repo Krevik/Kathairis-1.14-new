@@ -9,6 +9,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -40,7 +41,9 @@ public class ItemCrystalPickaxe extends ItemKathairisPickaxe {
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
 		if (mode == 0) {
 			if (!worldIn.isRemote && (double) state.getBlockHardness(worldIn, pos) != 0.0D) {
-				stack.damageItem(1, entityLiving);
+				stack.damageItem(1, entityLiving, (p_220045_0_) -> {
+					p_220045_0_.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+				});
 			}
 			if (entityLiving instanceof PlayerEntity) {
 				PlayerEntity player = (PlayerEntity) entityLiving;
@@ -126,8 +129,7 @@ public class ItemCrystalPickaxe extends ItemKathairisPickaxe {
 						}
 					} else if (!map.containsKey(Enchantments.SILK_TOUCH) && map.containsKey(Enchantments.FORTUNE)) {
 						for (BlockPos positionToBreak : blocksToBreak) {
-							worldIn.getBlockState(positionToBreak).getBlock().dropBlockAsItemWithChance(worldIn.getBlockState(positionToBreak), worldIn, positionToBreak, 1, map.get(Enchantments.FORTUNE).intValue());
-							destroyBlock(worldIn, positionToBreak, false);
+							destroyBlock(worldIn, positionToBreak, true);
 						}
 					} else {
 						for (BlockPos positionToBreak : blocksToBreak) {

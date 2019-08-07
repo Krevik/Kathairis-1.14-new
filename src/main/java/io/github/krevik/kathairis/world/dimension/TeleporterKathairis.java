@@ -1,37 +1,43 @@
 package io.github.krevik.kathairis.world.dimension;
 
+import com.google.common.collect.Maps;
 import io.github.krevik.kathairis.block.BlockKathairisPortal;
-import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
-import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
-import it.unimi.dsi.fastutil.objects.ObjectIterator;
+import io.github.krevik.kathairis.init.ModBlocks;
+import it.unimi.dsi.fastutil.longs.LongIterator;
+import it.unimi.dsi.fastutil.objects.Object2LongMap;
+import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.NetherPortalBlock;
 import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
 import net.minecraft.world.Teleporter;
-import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.server.TicketType;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.util.Supplier;
 
-import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
-
-import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_PORTAL;
 
 /**
  * @author Krevik
  */
 public class TeleporterKathairis extends Teleporter {
-
+	private static final Logger LOGGER = LogManager.getLogger();
+	private static final BlockKathairisPortal BLOCK_KATHAIRIS_PORTAL = ModBlocks.KATHAIRIS_PORTAL;
 	protected final ServerWorld world;
 	protected final Random random;
-	protected final Long2ObjectMap<PortalPosition> destinationCoordinateCache = new Long2ObjectOpenHashMap<>(4096);
+	protected final Map<ColumnPos, TeleporterKathairis.PortalPosition> destinationCoordinateCache = Maps.newHashMapWithExpectedSize(4096);
+	private final Object2LongMap<ColumnPos> field_222275_f = new Object2LongOpenHashMap<>();
 
 	public TeleporterKathairis(ServerWorld worldIn) {
 		super(worldIn);
@@ -39,127 +45,87 @@ public class TeleporterKathairis extends Teleporter {
 		this.random = new Random(worldIn.getSeed());
 	}
 
-	public void placeInPortal(@Nonnull final Entity entityIn, float rotationYaw) {
-		if (this.world.dimension.getType() != DimensionType.THE_END) {
-			if (!this.placeInExistingPortal(entityIn, rotationYaw)) {
-				this.makePortal(entityIn);
-				this.placeInExistingPortal(entityIn, rotationYaw);
-			}
+	public boolean func_222268_a(Entity p_222268_1_, float p_222268_2_) {
+		Vec3d vec3d = p_222268_1_.getLastPortalVec();
+		Direction direction = p_222268_1_.getTeleportDirection();
+		BlockPattern.PortalInfo blockpattern$portalinfo = this.func_222272_a(new BlockPos(p_222268_1_), p_222268_1_.getMotion(), direction, vec3d.x, vec3d.y, p_222268_1_ instanceof PlayerEntity);
+		if (blockpattern$portalinfo == null) {
+			return false;
 		} else {
-			int i = MathHelper.floor(entityIn.posX);
-			int j = MathHelper.floor(entityIn.posY) - 1;
-			int k = MathHelper.floor(entityIn.posZ);
-			int l = 1;
-			int i1 = 0;
-
-			for (int j1 = -2; j1 <= 2; ++j1) {
-				for (int k1 = -2; k1 <= 2; ++k1) {
-					for (int l1 = -1; l1 < 3; ++l1) {
-						int i2 = i + k1;
-						int j2 = j + l1;
-						int k2 = k - j1;
-						boolean flag = l1 < 0;
-						this.world.setBlockState(new BlockPos(i2, j2, k2), flag ? Blocks.STONE.getDefaultState() : Blocks.AIR.getDefaultState());
-					}
-				}
+			Vec3d vec3d1 = blockpattern$portalinfo.field_222505_a;
+			Vec3d vec3d2 = blockpattern$portalinfo.field_222506_b;
+			p_222268_1_.setMotion(vec3d2);
+			p_222268_1_.rotationYaw = p_222268_2_ + (float) blockpattern$portalinfo.field_222507_c;
+			if (p_222268_1_ instanceof ServerPlayerEntity) {
+				((ServerPlayerEntity) p_222268_1_).connection.setPlayerLocation(vec3d1.x, vec3d1.y, vec3d1.z, p_222268_1_.rotationYaw, p_222268_1_.rotationPitch);
+				((ServerPlayerEntity) p_222268_1_).connection.captureCurrentPosition();
+			} else {
+				p_222268_1_.setLocationAndAngles(vec3d1.x, vec3d1.y, vec3d1.z, p_222268_1_.rotationYaw, p_222268_1_.rotationPitch);
 			}
 
-			entityIn.setLocationAndAngles((double) i, (double) j, (double) k, entityIn.rotationYaw, 0.0F);
-			entityIn.setMotion(new Vec3d(0.0D,0.0D,0.0D));
+			return true;
 		}
 	}
 
-	public boolean placeInExistingPortal(Entity entityIn, float rotationYaw) {
+	@Nullable
+	public BlockPattern.PortalInfo func_222272_a(BlockPos p_222272_1_, Vec3d p_222272_2_, Direction p_222272_3_, double p_222272_4_, double p_222272_6_, boolean p_222272_8_) {
 		int i = 128;
-		double d0 = -1.0D;
-		int j = MathHelper.floor(entityIn.posX);
-		int k = MathHelper.floor(entityIn.posZ);
 		boolean flag = true;
-		BlockPos blockpos = BlockPos.ZERO;
-		long l = ChunkPos.asLong(j, k);
-		if (this.destinationCoordinateCache.containsKey(l)) {
-			PortalPosition teleporter$portalposition = this.destinationCoordinateCache.get(l);
-			d0 = 0.0D;
-			blockpos = teleporter$portalposition;
-			teleporter$portalposition.lastUpdateTime = this.world.getGameTime();
-			flag = false;
+		BlockPos blockpos = null;
+		ColumnPos columnpos = new ColumnPos(p_222272_1_);
+		if (!p_222272_8_ && this.field_222275_f.containsKey(columnpos)) {
+			return null;
 		} else {
-			BlockPos blockpos3 = new BlockPos(entityIn);
+			TeleporterKathairis.PortalPosition teleporter$portalposition = this.destinationCoordinateCache.get(columnpos);
+			if (teleporter$portalposition != null) {
+				blockpos = teleporter$portalposition.field_222267_a;
+				teleporter$portalposition.lastUpdateTime = this.world.getGameTime();
+				flag = false;
+			} else {
+				double d0 = Double.MAX_VALUE;
 
-			for (int i1 = -128; i1 <= 128; ++i1) {
-				BlockPos blockpos2;
-				for (int j1 = -128; j1 <= 128; ++j1) {
-					for (BlockPos blockpos1 = blockpos3.add(i1, this.world.getActualHeight() - 1 - blockpos3.getY(), j1); blockpos1.getY() >= 0; blockpos1 = blockpos2) {
-						blockpos2 = blockpos1.down();
-						if (this.world.getBlockState(blockpos1).getBlock() == KATHAIRIS_PORTAL) {
-							for (blockpos2 = blockpos1.down(); this.world.getBlockState(blockpos2).getBlock() == KATHAIRIS_PORTAL; blockpos2 = blockpos2.down()) {
-								blockpos1 = blockpos2;
-							}
+				for (int j = -128; j <= 128; ++j) {
+					BlockPos blockpos2;
+					for (int k = -128; k <= 128; ++k) {
+						for (BlockPos blockpos1 = p_222272_1_.add(j, this.world.getActualHeight() - 1 - p_222272_1_.getY(), k); blockpos1.getY() >= 0; blockpos1 = blockpos2) {
+							blockpos2 = blockpos1.down();
+							if (this.world.getBlockState(blockpos1).getBlock() == BLOCK_KATHAIRIS_PORTAL) {
+								for (blockpos2 = blockpos1.down(); this.world.getBlockState(blockpos2).getBlock() == BLOCK_KATHAIRIS_PORTAL; blockpos2 = blockpos2.down()) {
+									blockpos1 = blockpos2;
+								}
 
-							double d1 = blockpos1.distanceSq(blockpos3);
-							if (d0 < 0.0D || d1 < d0) {
-								d0 = d1;
-								blockpos = blockpos1;
+								double d1 = blockpos1.distanceSq(p_222272_1_);
+								if (d0 < 0.0D || d1 < d0) {
+									d0 = d1;
+									blockpos = blockpos1;
+								}
 							}
 						}
 					}
 				}
 			}
-		}
 
-		if (d0 >= 0.0D) {
-			if (flag) {
-				this.destinationCoordinateCache.put(l, new PortalPosition(blockpos, this.world.getGameTime()));
-			}
-
-			double d5 = (double) blockpos.getX() + 0.5D;
-			double d7 = (double) blockpos.getZ() + 0.5D;
-			BlockPattern.PatternHelper blockpattern$patternhelper = KATHAIRIS_PORTAL.createPatternHelper(this.world, blockpos);
-			boolean flag1 = blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() == Direction.AxisDirection.NEGATIVE;
-			double d2 = blockpattern$patternhelper.getForwards().getAxis() == Direction.Axis.X ? (double) blockpattern$patternhelper.getFrontTopLeft().getZ() : (double) blockpattern$patternhelper.getFrontTopLeft().getX();
-			double d6 = (double) (blockpattern$patternhelper.getFrontTopLeft().getY() + 1) - entityIn.getLastPortalVec().y * (double) blockpattern$patternhelper.getHeight();
-			if (flag1) {
-				++d2;
-			}
-
-			if (blockpattern$patternhelper.getForwards().getAxis() == Direction.Axis.X) {
-				d7 = d2 + (1.0D - entityIn.getLastPortalVec().x) * (double) blockpattern$patternhelper.getWidth() * (double) blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
+			if (blockpos == null) {
+				long l = this.world.getGameTime() + 300L;
+				this.field_222275_f.put(columnpos, l);
+				return null;
 			} else {
-				d5 = d2 + (1.0D - entityIn.getLastPortalVec().x) * (double) blockpattern$patternhelper.getWidth() * (double) blockpattern$patternhelper.getForwards().rotateY().getAxisDirection().getOffset();
-			}
+				if (flag) {
+					this.destinationCoordinateCache.put(columnpos, new TeleporterKathairis.PortalPosition(blockpos, this.world.getGameTime()));
+					Logger logger = LOGGER;
+					Supplier[] asupplier = new Supplier[2];
+					Dimension dimension = this.world.getDimension();
+					asupplier[0] = dimension::getType;
+					asupplier[1] = () -> {
+						return columnpos;
+					};
+					logger.debug("Adding nether portal ticket for {}:{}", asupplier);
+					this.world.getChunkProvider().func_217228_a(TicketType.PORTAL, new ChunkPos(blockpos), 3, columnpos);
+				}
 
-			float f = 0.0F;
-			float f1 = 0.0F;
-			float f2 = 0.0F;
-			float f3 = 0.0F;
-			if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection()) {
-				f = 1.0F;
-				f1 = 1.0F;
-			} else if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection().getOpposite()) {
-				f = -1.0F;
-				f1 = -1.0F;
-			} else if (blockpattern$patternhelper.getForwards().getOpposite() == entityIn.getTeleportDirection().rotateY()) {
-				f2 = 1.0F;
-				f3 = -1.0F;
-			} else {
-				f2 = -1.0F;
-				f3 = 1.0F;
+				BlockPattern.PatternHelper blockpattern$patternhelper = BLOCK_KATHAIRIS_PORTAL.createPatternHelper(this.world, blockpos);
+				return blockpattern$patternhelper.func_222504_a(p_222272_3_, blockpos, p_222272_6_, p_222272_2_, p_222272_4_);
 			}
-
-			double d3 = entityIn.getMotion().x;
-			double d4 = entityIn.getMotion().z;
-			entityIn.setMotion(new Vec3d(d3 * (double) f + d4 * (double) f3,entityIn.getMotion().getY(),d3 * (double) f2 + d4 * (double) f1));
-			entityIn.rotationYaw = rotationYaw - (float) (entityIn.getTeleportDirection().getOpposite().getHorizontalIndex() * 90) + (float) (blockpattern$patternhelper.getForwards().getHorizontalIndex() * 90);
-			if (entityIn instanceof ServerPlayerEntity) {
-				((ServerPlayerEntity) entityIn).connection.setPlayerLocation(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch);
-				((ServerPlayerEntity) entityIn).connection.captureCurrentPosition();
-			} else {
-				entityIn.setLocationAndAngles(d5, d6, d7, entityIn.rotationYaw, entityIn.rotationPitch);
-			}
-
-			return true;
-		} else {
-			return false;
 		}
 	}
 
@@ -309,51 +275,74 @@ public class TeleporterKathairis extends Teleporter {
 			}
 		}
 
-		BlockState iblockstate = KATHAIRIS_PORTAL.getDefaultState().with(BlockKathairisPortal.AXIS, l6 == 0 ? Direction.Axis.Z : Direction.Axis.X);
+		BlockState blockstate = BLOCK_KATHAIRIS_PORTAL.getDefaultState().with(NetherPortalBlock.AXIS, l6 == 0 ? Direction.Axis.Z : Direction.Axis.X);
 
 		for (int k8 = 0; k8 < 2; ++k8) {
 			for (int j9 = 0; j9 < 3; ++j9) {
 				blockpos$mutableblockpos.setPos(i6 + k8 * l6, k2 + j9, k6 + k8 * i3);
-				this.world.setBlockState(blockpos$mutableblockpos, iblockstate, 18);
+				this.world.setBlockState(blockpos$mutableblockpos, blockstate, 18);
 			}
 		}
 
 		return true;
 	}
 
+	/**
+	 * called periodically to remove out-of-date portal locations from the cache list. Argument par1 is a
+	 * WorldServer.getTotalWorldTime() value.
+	 */
+	public void tick(long worldTime) {
+		if (worldTime % 100L == 0L) {
+			this.func_222270_b(worldTime);
+			this.func_222269_c(worldTime);
+		}
 
-	@Override
-	public void placeEntity(World world, Entity entity, float yaw) {
-		if (entity instanceof ServerPlayerEntity)
-			placeInPortal(entity, yaw);
-		else
-			placeInExistingPortal(entity, yaw);
 	}
 
-	public void removeStalePortalLocations(long worldTime) {
-		if (worldTime % 100L == 0L) {
-			long i = worldTime - 300L;
-			ObjectIterator<PortalPosition> objectiterator = this.destinationCoordinateCache.values().iterator();
+	private void func_222270_b(long p_222270_1_) {
+		LongIterator longiterator = this.field_222275_f.values().iterator();
 
-			while (objectiterator.hasNext()) {
-				PortalPosition teleporter$portalposition = objectiterator.next();
-				if (teleporter$portalposition == null || teleporter$portalposition.lastUpdateTime < i) {
-					objectiterator.remove();
-				}
+		while (longiterator.hasNext()) {
+			long i = longiterator.nextLong();
+			if (i <= p_222270_1_) {
+				longiterator.remove();
 			}
 		}
 
 	}
 
-	public class PortalPosition extends BlockPos {
+	private void func_222269_c(long p_222269_1_) {
+		long i = p_222269_1_ - 300L;
+		Iterator<Map.Entry<ColumnPos, TeleporterKathairis.PortalPosition>> iterator = this.destinationCoordinateCache.entrySet().iterator();
 
-		public long lastUpdateTime;
-
-		public PortalPosition(BlockPos pos, long lastUpdate) {
-			super(pos.getX(), pos.getY(), pos.getZ());
-			this.lastUpdateTime = lastUpdate;
+		while (iterator.hasNext()) {
+			Map.Entry<ColumnPos, TeleporterKathairis.PortalPosition> entry = iterator.next();
+			TeleporterKathairis.PortalPosition teleporter$portalposition = entry.getValue();
+			if (teleporter$portalposition.lastUpdateTime < i) {
+				ColumnPos columnpos = entry.getKey();
+				Logger logger = LOGGER;
+				Supplier[] asupplier = new Supplier[2];
+				Dimension dimension = this.world.getDimension();
+				asupplier[0] = dimension::getType;
+				asupplier[1] = () -> {
+					return columnpos;
+				};
+				logger.debug("Removing kathairis portal ticket for {}:{}", asupplier);
+				this.world.getChunkProvider().func_217222_b(TicketType.PORTAL, new ChunkPos(teleporter$portalposition.field_222267_a), 3, columnpos);
+				iterator.remove();
+			}
 		}
 
 	}
 
+	static class PortalPosition {
+		public final BlockPos field_222267_a;
+		public long lastUpdateTime;
+
+		public PortalPosition(BlockPos p_i50813_1_, long p_i50813_2_) {
+			this.field_222267_a = p_i50813_1_;
+			this.lastUpdateTime = p_i50813_2_;
+		}
+
+	}
 }

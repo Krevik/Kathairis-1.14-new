@@ -123,12 +123,6 @@ public class EntityLivingFlower extends EntityKatharianAnimal
         return CreatureAttribute.UNDEFINED;
     }
 
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_LIVINGFLOWER;
-    }
 
     @Override
     public void writeAdditional(CompoundNBT compound)

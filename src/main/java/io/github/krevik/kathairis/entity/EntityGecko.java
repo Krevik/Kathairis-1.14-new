@@ -104,11 +104,6 @@ public class EntityGecko extends AnimalEntity {
         this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3000000417232513D);
     }
 
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-    	return KatharianLootTables.LOOT_GECKO;
-    }
 
     @Override
     public boolean isOnLadder()

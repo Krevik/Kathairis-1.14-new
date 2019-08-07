@@ -31,6 +31,9 @@ public final class ForgeEventSubscriber {
         if(event.getItem().getItem() == ModItems.MAGIC_BEANS){
             setRandomPotionEffectOnPlayer(event.getEntityLiving());
         }
+        if(event.getItem().getItem() == ModItems.NECTAR_BOWL){
+            event.getEntityLiving().heal(2f);
+        }
     }
 
     private static void setRandomPotionEffectOnPlayer(LivingEntity ep) {

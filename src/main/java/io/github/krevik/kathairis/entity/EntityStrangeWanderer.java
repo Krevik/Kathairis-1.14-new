@@ -12,6 +12,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
@@ -93,8 +94,8 @@ public class EntityStrangeWanderer extends MobEntity
     @Override
     public boolean processInteract(PlayerEntity player, Hand hand)
     {
-            if(player.world.isRemote) {
-                PacketHandler.sendTo(new PacketClientOpenGuiOldMan(), (PlayerEntity) player);
+            if(player instanceof ServerPlayerEntity) {
+                PacketHandler.sendTo(new PacketClientOpenGuiOldMan(), (ServerPlayerEntity) player);
             }
         return super.processInteract(player, hand);
     }

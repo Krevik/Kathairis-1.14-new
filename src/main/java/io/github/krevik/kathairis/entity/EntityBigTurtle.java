@@ -75,11 +75,6 @@ public class EntityBigTurtle extends AnimalEntity
         this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.1000000417232513D);
     }
 
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-    	return KatharianLootTables.LOOT_BIGTURTLE;
-    }
 
     @Override
     protected SoundEvent getDeathSound()

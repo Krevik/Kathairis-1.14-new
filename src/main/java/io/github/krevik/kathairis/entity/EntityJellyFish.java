@@ -160,12 +160,6 @@ public class EntityJellyFish extends CreatureEntity
         return ModSounds.MOB_JELLYFISH_DEAD;
     }
 
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_JELLYFISH;
-    }
 
     @Override
     public boolean canSpawn(IWorld p_205020_1_, SpawnReason p_205020_2_) {

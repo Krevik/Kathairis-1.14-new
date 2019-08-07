@@ -249,12 +249,6 @@ public class EntityBasicButterfly extends AmbientEntity
         compound.putInt("Variant", this.getVariant());
 
     }
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_BUTTERFLY;
-    }
 
     public enum ButterflyType implements IStringSerializable
     {

@@ -3,6 +3,7 @@ package io.github.krevik.kathairis.entity.ai;
 import io.github.krevik.kathairis.entity.EntityCloudOister;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 
 import java.util.EnumSet;
 
@@ -43,13 +44,12 @@ public class EntityAICloudOisterPanic extends Goal
     	jumpTimer++;
     	if(jumpTimer>12) {
     		jumpTimer=0;
-			creature.motionY+=0.5;
             creature.spawnJumpParticles(creature.getEntityWorld());
 			double destPosX=creature.posX-creature.getRNG().nextInt(6)+creature.getRNG().nextInt(6);
 			double destPosZ=creature.posZ-creature.getRNG().nextInt(6)+creature.getRNG().nextInt(6);
-			creature.getNavigator().setPath(creature.getNavigator().getPathToPos(new BlockPos(destPosX,creature.posY,destPosZ)), 1);
-			creature.motionX=(destPosX-creature.posX)*0.15;
-			creature.motionZ=(destPosZ-creature.posZ)*0.15;
-    	}
+			creature.getNavigator().setPath(creature.getNavigator().getPathToPos(new BlockPos(destPosX,creature.posY,destPosZ),0), 1);
+            creature.setMotion(new Vec3d((destPosX-creature.posX)*0.15,0.5,(destPosZ-creature.posZ)*0.15));
+
+        }
     }
 }

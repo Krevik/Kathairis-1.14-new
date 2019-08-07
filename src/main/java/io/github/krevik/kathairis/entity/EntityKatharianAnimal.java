@@ -25,9 +25,10 @@ public class EntityKatharianAnimal extends AnimalEntity {
         super(null,world);
     }
 
-    public EntityKatharianAnimal(EntityType<EntityKatharianAnimal> type, World world) {
+    public EntityKatharianAnimal(EntityType<? extends EntityKatharianAnimal> type, World world) {
         super(type, world);
     }
+
 
     @Nullable
     @Override

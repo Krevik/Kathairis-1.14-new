@@ -9,6 +9,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.SoundCategory;
@@ -59,7 +60,9 @@ public class ItemKathairisAxe extends ItemKathairisTool {
 			if (!world.isRemote) {
 				world.setBlockState(blockpos, block.getDefaultState().with(RotatedPillarBlock.AXIS, iblockstate.get(RotatedPillarBlock.AXIS)), 11);
 				if (entityplayer != null) {
-					p_195939_1_.getItem().damageItem(1, entityplayer);
+					p_195939_1_.getItem().damageItem(1, p_195939_1_.getPlayer(), (p_220045_0_) -> {
+						p_220045_0_.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+					});
 				}
 			}
 

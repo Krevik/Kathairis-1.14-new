@@ -216,12 +216,6 @@ public class EntityGaznowel extends FlyingEntity implements IRangedAttackMob, IM
         return SoundCategory.HOSTILE;
     }
 
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_GAZNOWEL;
-    }
 
     @Override
     protected float getSoundVolume()

@@ -107,11 +107,4 @@ public class EntityPoisonousScorpion extends CreatureEntity
         return CreatureAttribute.ARTHROPOD;
     }
 
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return KatharianLootTables.LOOT_POISONOUSSCORPION;
-    }
-
 }

@@ -42,28 +42,6 @@ public class BlockGlowVines extends BlockKathairisPlant {
 		setDefaultState(getDefaultState().with(VARIANT, EnumType.TOP).with(FACING, Direction.EAST));
 	}
 
-	public static boolean canPlaceBlockAtStatic(IWorldGenerationReader worldIn, BlockPos pos) {
-		boolean can = false;
-		if (!worldIn.isAirBlock(pos.east()) && worldIn.getBlockState(pos.east()).isSolid()) {
-			can = true;
-		}
-		if (!worldIn.isAirBlock(pos.west()) && worldIn.getBlockState(pos.west()).isSolid()) {
-			can = true;
-		}
-		if (!worldIn.isAirBlock(pos.south()) && worldIn.getBlockState(pos.south()).isSolid()) {
-			can = true;
-		}
-		if (!worldIn.isAirBlock(pos.north()) && worldIn.getBlockState(pos.north()).isSolid()) {
-			can = true;
-		}
-		if (!worldIn.isAirBlock(pos.up())) {
-			if (worldIn.getBlockState(pos.up()).getBlock() instanceof BlockGlowVines) {
-				EnumType upperVariant = worldIn.getBlockState(pos.up()).get(VARIANT);
-				can = upperVariant != EnumType.BOTTOM;
-			}
-		}
-		return can;
-	}
 
 	@Override
 	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
