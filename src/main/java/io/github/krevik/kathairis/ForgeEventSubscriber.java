@@ -23,7 +23,7 @@ import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.FORGE;
 @EventBusSubscriber(modid = MOD_ID, bus = FORGE)
 public final class ForgeEventSubscriber {
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public static void onEatenEvents(LivingEntityUseItemEvent event){
         if(event.getItem().getItem() == ModItems.HEART){
             event.getEntityLiving().heal(2F);

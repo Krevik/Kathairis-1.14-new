@@ -55,11 +55,11 @@ public class KatharianFeatureList {
 
 
     private static <C extends IFeatureConfig, F extends Feature<C>> F registerFeature(String key, F value) {
-        return (F)(Registry.<Feature<?>>register(Registry.FEATURE, "kathairis: " + key, value));
+        return (F)(Registry.<Feature<?>>register(Registry.FEATURE, "kathairis:" + key, value));
     }
 
     private static <C extends ISurfaceBuilderConfig, F extends SurfaceBuilder<C>> F registerSurfaceBuilder(String key, F builderIn) {
-        return (F)(Registry.<SurfaceBuilder<?>>register(Registry.SURFACE_BUILDER, "kathairis: " + key, builderIn));
+        return (F)(Registry.<SurfaceBuilder<?>>register(Registry.SURFACE_BUILDER, "kathairis:" + key, builderIn));
     }
 
 }

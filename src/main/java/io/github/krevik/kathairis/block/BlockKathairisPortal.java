@@ -12,6 +12,7 @@ import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.IParticleData;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -227,7 +228,7 @@ public class BlockKathairisPortal extends NetherPortalBlock {
 
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-        if (rand.nextInt(100) == 0) {
+        /*if (rand.nextInt(100) == 0) {
             worldIn.playSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_PORTAL_AMBIENT, SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);
         }
 
@@ -239,8 +240,31 @@ public class BlockKathairisPortal extends NetherPortalBlock {
             double d4 = ((double) rand.nextFloat() - 0.5D) * 0.15D;
             double d5 = ((double) rand.nextFloat() - 0.5D) * 0.15D;
 			worldIn.addParticle((IParticleData) ModParticles.FAST_PARTICLE,d0,d1,d2,d3,d4,d5);
-        }
+        }*/
+		if (rand.nextInt(100) == 0) {
+			worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, SoundEvents.BLOCK_PORTAL_AMBIENT, SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);
+		}
+
+		for(int i = 0; i < 4; ++i) {
+			double d0 = (double)((float)pos.getX() + rand.nextFloat());
+			double d1 = (double)((float)pos.getY() + rand.nextFloat());
+			double d2 = (double)((float)pos.getZ() + rand.nextFloat());
+			double d3 = ((double)rand.nextFloat() - 0.5D) * 0.5D;
+			double d4 = ((double)rand.nextFloat() - 0.5D) * 0.5D;
+			double d5 = ((double)rand.nextFloat() - 0.5D) * 0.5D;
+			int j = rand.nextInt(2) * 2 - 1;
+			if (worldIn.getBlockState(pos.west()).getBlock() != this && worldIn.getBlockState(pos.east()).getBlock() != this) {
+				d0 = (double)pos.getX() + 0.5D + 0.25D * (double)j;
+				d3 = (double)(rand.nextFloat() * 2.0F * (float)j);
+			} else {
+				d2 = (double)pos.getZ() + 0.5D + 0.25D * (double)j;
+				d5 = (double)(rand.nextFloat() * 2.0F * (float)j);
+			}
+
+			worldIn.addParticle(ParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5);
+		}
 	}
+
 
 	@Override
 	public BlockState rotate(BlockState state, Rotation rot) {
@@ -318,7 +342,7 @@ public class BlockKathairisPortal extends NetherPortalBlock {
 		}
 	}
 
-	public static class Size extends NetherPortalBlock.Size {
+	public static class Size  {
 
 		private final IWorld world;
 		private final Direction.Axis axis;
@@ -330,7 +354,6 @@ public class BlockKathairisPortal extends NetherPortalBlock {
 		private int width;
 
 		public Size(IWorld p_i48740_1_, BlockPos p_i48740_2_, Direction.Axis p_i48740_3_) {
-			super(p_i48740_1_,p_i48740_2_,p_i48740_3_);
 			this.world = p_i48740_1_;
 			this.axis = p_i48740_3_;
 			if (p_i48740_3_ == Direction.Axis.X) {
@@ -362,15 +385,15 @@ public class BlockKathairisPortal extends NetherPortalBlock {
 
 		protected int getDistanceUntilEdge(BlockPos p_180120_1_, Direction p_180120_2_) {
 			int i;
-			for (i = 0; i < 22; ++i) {
+			for(i = 0; i < 22; ++i) {
 				BlockPos blockpos = p_180120_1_.offset(p_180120_2_, i);
-				if (!world.isAirBlock(blockpos) || this.world.getBlockState(blockpos.down()).getBlock() != Blocks.STONE ) {
+				if (!this.func_196900_a(this.world.getBlockState(blockpos)) || this.world.getBlockState(blockpos.down()).getBlock() != Blocks.STONE) {
 					break;
 				}
 			}
 
 			Block block = this.world.getBlockState(p_180120_1_.offset(p_180120_2_, i)).getBlock();
-			return (block == Blocks.STONE) ? i : 0;
+			return block == Blocks.STONE ? i : 0;
 		}
 
 		public int getHeight() {
@@ -427,9 +450,9 @@ public class BlockKathairisPortal extends NetherPortalBlock {
 			}
 		}
 
-		protected boolean func_196900_a(BlockState state) {
-			Block blockIn = state.getBlock();
-			return blockIn.getMaterial(blockIn.getDefaultState()) == Material.AIR || blockIn == Blocks.FIRE || blockIn == KATHAIRIS_PORTAL;
+		protected boolean func_196900_a(BlockState p_196900_1_) {
+			Block block = p_196900_1_.getBlock();
+			return p_196900_1_.isAir() || block == Blocks.FIRE || block == ModBlocks.KATHAIRIS_PORTAL;
 		}
 
 		public boolean isValid() {
