@@ -2,6 +2,7 @@ package io.github.krevik.kathairis.world.dimension.biome;
 
 import com.google.common.collect.Sets;
 import io.github.krevik.kathairis.init.ModBiomes;
+import io.github.krevik.kathairis.world.dimension.biome.gen.layers.KatharianLayerUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
@@ -29,7 +30,7 @@ public class KatharianBiomeProvider extends BiomeProvider {
                 ModBiomes.PLAIN_FIELDS,ModBiomes.KATHARIAN_SWAMP};
         WorldInfo lvt_2_1_ = p_i48971_1_.getWorldInfo();
         OverworldGenSettings lvt_3_1_ = p_i48971_1_.getGeneratorSettings();
-        Layer[] lvt_4_1_ = LayerUtil.buildOverworldProcedure(lvt_2_1_.getSeed(), lvt_2_1_.getGenerator(), lvt_3_1_);
+        Layer[] lvt_4_1_ = KatharianLayerUtil.buildOverworldProcedure(lvt_2_1_.getSeed(), lvt_2_1_.getGenerator(), lvt_3_1_);
         this.genBiomes = lvt_4_1_[0];
         this.biomeFactoryLayer = lvt_4_1_[1];
     }
