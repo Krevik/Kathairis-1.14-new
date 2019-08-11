@@ -21,9 +21,9 @@ public enum GenLayerKatharianRiverMix implements IAreaTransformer2, IDimOffset0T
     }
 
     @Override
-    public int apply(INoiseRandom iNoiseRandom, IArea p_202709_3_, IArea p_202709_4_, int p_202709_5_, int p_202709_6_) {
-        int lvt_7_1_ = p_202709_3_.getValue(p_202709_5_, p_202709_6_);
-        int lvt_8_1_ = p_202709_4_.getValue(p_202709_5_, p_202709_6_);
+    public int apply(INoiseRandom iNoiseRandom, IArea area1, IArea area2, int pos1, int pos2) {
+        int lvt_7_1_ = area1.getValue(pos1, pos2);
+        int lvt_8_1_ = area2.getValue(pos1, pos2);
         if (KatharianLayerUtil.isOcean(lvt_7_1_)) {
             return lvt_7_1_;
         } else if (lvt_8_1_ == RIVER) {

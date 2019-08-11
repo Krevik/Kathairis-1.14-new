@@ -1,42 +1,48 @@
 package io.github.krevik.kathairis.world.dimension;
 
-import com.google.common.collect.Maps;
+
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
 import io.github.krevik.kathairis.block.BlockKathairisPortal;
 import io.github.krevik.kathairis.init.ModBlocks;
+import net.minecraft.block.NetherPortalBlock;
+import net.minecraft.world.Teleporter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.util.Supplier;
+
+import com.google.common.collect.Maps;
+
 import it.unimi.dsi.fastutil.longs.LongIterator;
 import it.unimi.dsi.fastutil.objects.Object2LongMap;
 import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.NetherPortalBlock;
 import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.math.*;
-import net.minecraft.world.Teleporter;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.ColumnPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.server.TicketType;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.util.Supplier;
 
-import javax.annotation.Nullable;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Random;
-
-/**
- * @author Krevik
- */
 public class TeleporterKathairis extends Teleporter {
 	private static final Logger LOGGER = LogManager.getLogger();
-	private static final BlockKathairisPortal BLOCK_KATHAIRIS_PORTAL = ModBlocks.KATHAIRIS_PORTAL;
+	private static final BlockKathairisPortal BLOCK_KATHAIRIS_PORTAL = (BlockKathairisPortal) ModBlocks.KATHAIRIS_PORTAL;
 	protected final ServerWorld world;
 	protected final Random random;
-	protected final Map<ColumnPos, TeleporterKathairis.PortalPosition> destinationCoordinateCache = Maps.newHashMapWithExpectedSize(4096);
+	protected final Map<ColumnPos, PortalPosition> destinationCoordinateCache = Maps.newHashMapWithExpectedSize(4096);
 	private final Object2LongMap<ColumnPos> field_222275_f = new Object2LongOpenHashMap<>();
 
 	public TeleporterKathairis(ServerWorld worldIn) {
@@ -55,10 +61,10 @@ public class TeleporterKathairis extends Teleporter {
 			Vec3d vec3d1 = blockpattern$portalinfo.field_222505_a;
 			Vec3d vec3d2 = blockpattern$portalinfo.field_222506_b;
 			p_222268_1_.setMotion(vec3d2);
-			p_222268_1_.rotationYaw = p_222268_2_ + (float) blockpattern$portalinfo.field_222507_c;
+			p_222268_1_.rotationYaw = p_222268_2_ + (float)blockpattern$portalinfo.field_222507_c;
 			if (p_222268_1_ instanceof ServerPlayerEntity) {
-				((ServerPlayerEntity) p_222268_1_).connection.setPlayerLocation(vec3d1.x, vec3d1.y, vec3d1.z, p_222268_1_.rotationYaw, p_222268_1_.rotationPitch);
-				((ServerPlayerEntity) p_222268_1_).connection.captureCurrentPosition();
+				((ServerPlayerEntity)p_222268_1_).connection.setPlayerLocation(vec3d1.x, vec3d1.y, vec3d1.z, p_222268_1_.rotationYaw, p_222268_1_.rotationPitch);
+				((ServerPlayerEntity)p_222268_1_).connection.captureCurrentPosition();
 			} else {
 				p_222268_1_.setLocationAndAngles(vec3d1.x, vec3d1.y, vec3d1.z, p_222268_1_.rotationYaw, p_222268_1_.rotationPitch);
 			}
@@ -76,7 +82,7 @@ public class TeleporterKathairis extends Teleporter {
 		if (!p_222272_8_ && this.field_222275_f.containsKey(columnpos)) {
 			return null;
 		} else {
-			TeleporterKathairis.PortalPosition teleporter$portalposition = this.destinationCoordinateCache.get(columnpos);
+			PortalPosition teleporter$portalposition = this.destinationCoordinateCache.get(columnpos);
 			if (teleporter$portalposition != null) {
 				blockpos = teleporter$portalposition.field_222267_a;
 				teleporter$portalposition.lastUpdateTime = this.world.getGameTime();
@@ -84,13 +90,13 @@ public class TeleporterKathairis extends Teleporter {
 			} else {
 				double d0 = Double.MAX_VALUE;
 
-				for (int j = -128; j <= 128; ++j) {
+				for(int j = -128; j <= 128; ++j) {
 					BlockPos blockpos2;
-					for (int k = -128; k <= 128; ++k) {
-						for (BlockPos blockpos1 = p_222272_1_.add(j, this.world.getActualHeight() - 1 - p_222272_1_.getY(), k); blockpos1.getY() >= 0; blockpos1 = blockpos2) {
+					for(int k = -128; k <= 128; ++k) {
+						for(BlockPos blockpos1 = p_222272_1_.add(j, this.world.getActualHeight() - 1 - p_222272_1_.getY(), k); blockpos1.getY() >= 0; blockpos1 = blockpos2) {
 							blockpos2 = blockpos1.down();
 							if (this.world.getBlockState(blockpos1).getBlock() == BLOCK_KATHAIRIS_PORTAL) {
-								for (blockpos2 = blockpos1.down(); this.world.getBlockState(blockpos2).getBlock() == BLOCK_KATHAIRIS_PORTAL; blockpos2 = blockpos2.down()) {
+								for(blockpos2 = blockpos1.down(); this.world.getBlockState(blockpos2).getBlock() == BLOCK_KATHAIRIS_PORTAL; blockpos2 = blockpos2.down()) {
 									blockpos1 = blockpos2;
 								}
 
@@ -111,7 +117,7 @@ public class TeleporterKathairis extends Teleporter {
 				return null;
 			} else {
 				if (flag) {
-					this.destinationCoordinateCache.put(columnpos, new TeleporterKathairis.PortalPosition(blockpos, this.world.getGameTime()));
+					this.destinationCoordinateCache.put(columnpos, new PortalPosition(blockpos, this.world.getGameTime()));
 					Logger logger = LOGGER;
 					Supplier[] asupplier = new Supplier[2];
 					Dimension dimension = this.world.getDimension();
@@ -119,7 +125,7 @@ public class TeleporterKathairis extends Teleporter {
 					asupplier[1] = () -> {
 						return columnpos;
 					};
-					logger.debug("Adding nether portal ticket for {}:{}", asupplier);
+					logger.debug("Adding kathairis portal ticket for {}:{}", asupplier);
 					this.world.getChunkProvider().func_217228_a(TicketType.PORTAL, new ChunkPos(blockpos), 3, columnpos);
 				}
 
@@ -142,20 +148,20 @@ public class TeleporterKathairis extends Teleporter {
 		int i2 = this.random.nextInt(4);
 		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 
-		for (int j2 = j - 16; j2 <= j + 16; ++j2) {
-			double d1 = (double) j2 + 0.5D - entityIn.posX;
+		for(int j2 = j - 16; j2 <= j + 16; ++j2) {
+			double d1 = (double)j2 + 0.5D - entityIn.posX;
 
-			for (int l2 = l - 16; l2 <= l + 16; ++l2) {
-				double d2 = (double) l2 + 0.5D - entityIn.posZ;
+			for(int l2 = l - 16; l2 <= l + 16; ++l2) {
+				double d2 = (double)l2 + 0.5D - entityIn.posZ;
 
 				label276:
-				for (int j3 = this.world.getActualHeight() - 1; j3 >= 0; --j3) {
+				for(int j3 = this.world.getActualHeight() - 1; j3 >= 0; --j3) {
 					if (this.world.isAirBlock(blockpos$mutableblockpos.setPos(j2, j3, l2))) {
-						while (j3 > 0 && this.world.isAirBlock(blockpos$mutableblockpos.setPos(j2, j3 - 1, l2))) {
+						while(j3 > 0 && this.world.isAirBlock(blockpos$mutableblockpos.setPos(j2, j3 - 1, l2))) {
 							--j3;
 						}
 
-						for (int k3 = i2; k3 < i2 + 4; ++k3) {
+						for(int k3 = i2; k3 < i2 + 4; ++k3) {
 							int l3 = k3 % 2;
 							int i4 = 1 - l3;
 							if (k3 % 4 >= 2) {
@@ -163,9 +169,9 @@ public class TeleporterKathairis extends Teleporter {
 								i4 = -i4;
 							}
 
-							for (int j4 = 0; j4 < 3; ++j4) {
-								for (int k4 = 0; k4 < 4; ++k4) {
-									for (int l4 = -1; l4 < 4; ++l4) {
+							for(int j4 = 0; j4 < 3; ++j4) {
+								for(int k4 = 0; k4 < 4; ++k4) {
+									for(int l4 = -1; l4 < 4; ++l4) {
 										int i5 = j2 + (k4 - 1) * l3 + j4 * i4;
 										int j5 = j3 + l4;
 										int k5 = l2 + (k4 - 1) * i4 - j4 * l3;
@@ -177,7 +183,7 @@ public class TeleporterKathairis extends Teleporter {
 								}
 							}
 
-							double d5 = (double) j3 + 0.5D - entityIn.posY;
+							double d5 = (double)j3 + 0.5D - entityIn.posY;
 							double d7 = d1 * d1 + d5 * d5 + d2 * d2;
 							if (d0 < 0.0D || d7 < d0) {
 								d0 = d7;
@@ -193,25 +199,25 @@ public class TeleporterKathairis extends Teleporter {
 		}
 
 		if (d0 < 0.0D) {
-			for (int l5 = j - 16; l5 <= j + 16; ++l5) {
-				double d3 = (double) l5 + 0.5D - entityIn.posX;
+			for(int l5 = j - 16; l5 <= j + 16; ++l5) {
+				double d3 = (double)l5 + 0.5D - entityIn.posX;
 
-				for (int j6 = l - 16; j6 <= l + 16; ++j6) {
-					double d4 = (double) j6 + 0.5D - entityIn.posZ;
+				for(int j6 = l - 16; j6 <= l + 16; ++j6) {
+					double d4 = (double)j6 + 0.5D - entityIn.posZ;
 
 					label214:
-					for (int i7 = this.world.getActualHeight() - 1; i7 >= 0; --i7) {
+					for(int i7 = this.world.getActualHeight() - 1; i7 >= 0; --i7) {
 						if (this.world.isAirBlock(blockpos$mutableblockpos.setPos(l5, i7, j6))) {
-							while (i7 > 0 && this.world.isAirBlock(blockpos$mutableblockpos.setPos(l5, i7 - 1, j6))) {
+							while(i7 > 0 && this.world.isAirBlock(blockpos$mutableblockpos.setPos(l5, i7 - 1, j6))) {
 								--i7;
 							}
 
-							for (int l7 = i2; l7 < i2 + 2; ++l7) {
+							for(int l7 = i2; l7 < i2 + 2; ++l7) {
 								int l8 = l7 % 2;
 								int k9 = 1 - l8;
 
-								for (int i10 = 0; i10 < 4; ++i10) {
-									for (int k10 = -1; k10 < 4; ++k10) {
+								for(int i10 = 0; i10 < 4; ++i10) {
+									for(int k10 = -1; k10 < 4; ++k10) {
 										int i11 = l5 + (i10 - 1) * l8;
 										int j11 = i7 + k10;
 										int k11 = j6 + (i10 - 1) * k9;
@@ -222,7 +228,7 @@ public class TeleporterKathairis extends Teleporter {
 									}
 								}
 
-								double d6 = (double) i7 + 0.5D - entityIn.posY;
+								double d6 = (double)i7 + 0.5D - entityIn.posY;
 								double d8 = d3 * d3 + d6 * d6 + d4 * d4;
 								if (d0 < 0.0D || d8 < d0) {
 									d0 = d8;
@@ -252,9 +258,9 @@ public class TeleporterKathairis extends Teleporter {
 			j1 = MathHelper.clamp(j1, 70, this.world.getActualHeight() - 10);
 			k2 = j1;
 
-			for (int j7 = -1; j7 <= 1; ++j7) {
-				for (int i8 = 1; i8 < 3; ++i8) {
-					for (int i9 = -1; i9 < 3; ++i9) {
+			for(int j7 = -1; j7 <= 1; ++j7) {
+				for(int i8 = 1; i8 < 3; ++i8) {
+					for(int i9 = -1; i9 < 3; ++i9) {
 						int l9 = i6 + (i8 - 1) * l6 + j7 * i3;
 						int j10 = k2 + i9;
 						int l10 = k6 + (i8 - 1) * i3 - j7 * l6;
@@ -266,8 +272,8 @@ public class TeleporterKathairis extends Teleporter {
 			}
 		}
 
-		for (int k7 = -1; k7 < 3; ++k7) {
-			for (int j8 = -1; j8 < 4; ++j8) {
+		for(int k7 = -1; k7 < 3; ++k7) {
+			for(int j8 = -1; j8 < 4; ++j8) {
 				if (k7 == -1 || k7 == 2 || j8 == -1 || j8 == 3) {
 					blockpos$mutableblockpos.setPos(i6 + k7 * l6, k2 + j8, k6 + k7 * i3);
 					this.world.setBlockState(blockpos$mutableblockpos, Blocks.STONE.getDefaultState(), 3);
@@ -277,8 +283,8 @@ public class TeleporterKathairis extends Teleporter {
 
 		BlockState blockstate = BLOCK_KATHAIRIS_PORTAL.getDefaultState().with(NetherPortalBlock.AXIS, l6 == 0 ? Direction.Axis.Z : Direction.Axis.X);
 
-		for (int k8 = 0; k8 < 2; ++k8) {
-			for (int j9 = 0; j9 < 3; ++j9) {
+		for(int k8 = 0; k8 < 2; ++k8) {
+			for(int j9 = 0; j9 < 3; ++j9) {
 				blockpos$mutableblockpos.setPos(i6 + k8 * l6, k2 + j9, k6 + k8 * i3);
 				this.world.setBlockState(blockpos$mutableblockpos, blockstate, 18);
 			}
@@ -302,7 +308,7 @@ public class TeleporterKathairis extends Teleporter {
 	private void func_222270_b(long p_222270_1_) {
 		LongIterator longiterator = this.field_222275_f.values().iterator();
 
-		while (longiterator.hasNext()) {
+		while(longiterator.hasNext()) {
 			long i = longiterator.nextLong();
 			if (i <= p_222270_1_) {
 				longiterator.remove();
@@ -313,11 +319,11 @@ public class TeleporterKathairis extends Teleporter {
 
 	private void func_222269_c(long p_222269_1_) {
 		long i = p_222269_1_ - 300L;
-		Iterator<Map.Entry<ColumnPos, TeleporterKathairis.PortalPosition>> iterator = this.destinationCoordinateCache.entrySet().iterator();
+		Iterator<Entry<ColumnPos, PortalPosition>> iterator = this.destinationCoordinateCache.entrySet().iterator();
 
-		while (iterator.hasNext()) {
-			Map.Entry<ColumnPos, TeleporterKathairis.PortalPosition> entry = iterator.next();
-			TeleporterKathairis.PortalPosition teleporter$portalposition = entry.getValue();
+		while(iterator.hasNext()) {
+			Entry<ColumnPos, PortalPosition> entry = iterator.next();
+			PortalPosition teleporter$portalposition = entry.getValue();
 			if (teleporter$portalposition.lastUpdateTime < i) {
 				ColumnPos columnpos = entry.getKey();
 				Logger logger = LOGGER;
@@ -327,7 +333,7 @@ public class TeleporterKathairis extends Teleporter {
 				asupplier[1] = () -> {
 					return columnpos;
 				};
-				logger.debug("Removing kathairis portal ticket for {}:{}", asupplier);
+				logger.debug("Removing nether portal ticket for {}:{}", asupplier);
 				this.world.getChunkProvider().func_217222_b(TicketType.PORTAL, new ChunkPos(teleporter$portalposition.field_222267_a), 3, columnpos);
 				iterator.remove();
 			}
@@ -343,6 +349,5 @@ public class TeleporterKathairis extends Teleporter {
 			this.field_222267_a = p_i50813_1_;
 			this.lastUpdateTime = p_i50813_2_;
 		}
-
 	}
 }

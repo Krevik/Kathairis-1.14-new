@@ -22,6 +22,30 @@ public enum GenLayerDeleteRiverNearDesert implements ICastleTransformer {
                 return KATHARIAN_DESERT_ID;
             }
         }
+        if(biome1ID==KATHARIAN_RIVER_ID){
+            if(KatharianLayerUtil.isKatharianDesertBiome(biomeCenter)||KatharianLayerUtil.isKatharianDesertBiome(biome2ID)||KatharianLayerUtil.isKatharianDesertBiome(biome3ID)||
+                    KatharianLayerUtil.isKatharianDesertBiome(biome4ID)){
+                return KATHARIAN_DESERT_ID;
+            }
+        }
+        if(biome2ID==KATHARIAN_RIVER_ID){
+            if(KatharianLayerUtil.isKatharianDesertBiome(biome1ID)||KatharianLayerUtil.isKatharianDesertBiome(biomeCenter)||KatharianLayerUtil.isKatharianDesertBiome(biome3ID)||
+                    KatharianLayerUtil.isKatharianDesertBiome(biome4ID)){
+                return KATHARIAN_DESERT_ID;
+            }
+        }
+        if(biome3ID==KATHARIAN_RIVER_ID){
+            if(KatharianLayerUtil.isKatharianDesertBiome(biome1ID)||KatharianLayerUtil.isKatharianDesertBiome(biome2ID)||KatharianLayerUtil.isKatharianDesertBiome(biomeCenter)||
+                    KatharianLayerUtil.isKatharianDesertBiome(biome4ID)){
+                return KATHARIAN_DESERT_ID;
+            }
+        }
+        if(biome4ID==KATHARIAN_RIVER_ID){
+            if(KatharianLayerUtil.isKatharianDesertBiome(biome1ID)||KatharianLayerUtil.isKatharianDesertBiome(biome2ID)||KatharianLayerUtil.isKatharianDesertBiome(biome3ID)||
+                    KatharianLayerUtil.isKatharianDesertBiome(biomeCenter)){
+                return KATHARIAN_DESERT_ID;
+            }
+        }
         return biomeCenter;
     }
 }

@@ -6,6 +6,7 @@ import io.github.krevik.kathairis.entity.*;
 import io.github.krevik.kathairis.entity.butterfly.*;
 import io.github.krevik.kathairis.init.*;
 import io.github.krevik.kathairis.item.*;
+import io.github.krevik.kathairis.util.ModReference;
 import io.github.krevik.kathairis.util.ModUtil;
 import io.github.krevik.kathairis.util.networking.PacketHandler;
 import io.github.krevik.kathairis.world.dimension.ModDimensionKathairis;
@@ -361,7 +362,7 @@ public final class ModEventSubscriber {
 	@SubscribeEvent
 	public static void onRegisterModDimensions(final RegistryEvent.Register<ModDimension> event) {
 		event.getRegistry().registerAll(
-						new ModDimensionKathairis(new ResourceLocation(MOD_ID, "kathairis"))
+						new ModDimensionKathairis(ModReference.KATHAIRIS)
 		);
 	}
 
@@ -369,12 +370,12 @@ public final class ModEventSubscriber {
 	public static void onFMLCommonSetup(final FMLCommonSetupEvent event){
 		ModParticles.registerParticles();
 		PacketHandler.register();
-		Kathairis.KATH_DIM_TYPE=DimensionManager.registerDimension(new ResourceLocation(MOD_ID,"kath_dim_type"), ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)),true);
+		Kathairis.KATH_DIM_TYPE=DimensionManager.registerDimension(ModReference.KATHAIRIS, ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)),true);
 	}
 
 	@SubscribeEvent
 	public static void onDimensionRegisterEvent(final RegisterDimensionsEvent event){
-		Kathairis.KATH_DIM_TYPE=DimensionManager.registerDimension(new ResourceLocation(MOD_ID,"kath_dim_type"), ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)),true);
+		Kathairis.KATH_DIM_TYPE=DimensionManager.registerDimension(ModReference.KATHAIRIS, ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)),true);
 	}
 
 	@SubscribeEvent

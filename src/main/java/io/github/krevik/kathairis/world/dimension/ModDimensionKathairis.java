@@ -1,5 +1,7 @@
 package io.github.krevik.kathairis.world.dimension;
 
+import io.github.krevik.kathairis.init.ModDimensions;
+import io.github.krevik.kathairis.util.ModReference;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.Dimension;
@@ -13,10 +15,15 @@ import java.util.function.BiFunction;
  */
 public class ModDimensionKathairis extends ModDimension {
 
+
 	// Registry name in constructor is ew but apparently necessary.
 	public ModDimensionKathairis(final ResourceLocation registryName) {
 		this.setRegistryName(registryName);
 
+	}
+
+	public static DimensionType getDimensionType() {
+		return DimensionType.byName(ModReference.KATHAIRIS);
 	}
 
 	@Override

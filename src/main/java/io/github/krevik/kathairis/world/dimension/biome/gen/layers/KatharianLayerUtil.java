@@ -67,8 +67,8 @@ public class KatharianLayerUtil {
         layer1 = repeat(1000L, ZoomLayer.NORMAL, layer1, j, contextFactory);
         layer1 = GenLayerKatharianRiver.INSTANCE.apply(contextFactory.apply(1L), layer1);
         layer1 = SmoothLayer.INSTANCE.apply(contextFactory.apply(1000L), layer1);
+        layer2 = GenLayerDeleteRiverNearDesert.INSTANCE.apply(contextFactory.apply(10L), layer2);
         layer2 = GenLayerBiomeVariants.INSTANCE.apply(contextFactory.apply(1000L), layer2);
-        layer2 = GenLayerDeleteRiverNearDesert.INSTANCE.apply(contextFactory.apply(100L), layer2);
 
         for(int k = 0; k < i; ++k) {
             layer2 = ZoomLayer.NORMAL.apply(contextFactory.apply((long)(1000 + k)), layer2);
@@ -78,7 +78,7 @@ public class KatharianLayerUtil {
                 layer2 = ZoomLayer.NORMAL.apply(contextFactory.apply((long)(1000L)), layer2);
             }
         }
-
+        layer2 = GenLayerDeleteRiverNearDesert.INSTANCE.apply(contextFactory.apply(1L), layer2);
         layer2 = SmoothLayer.INSTANCE.apply(contextFactory.apply(1000L), layer2);
         layer2 = GenLayerKatharianRiverMix.INSTANCE.apply(contextFactory.apply(100L), layer2, layer1);
 
