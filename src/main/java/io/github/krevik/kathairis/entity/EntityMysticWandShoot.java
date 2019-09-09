@@ -82,7 +82,8 @@ public class EntityMysticWandShoot extends Entity {
                 this.remove();
             }
                     for(int c=0;c<=3;c++) {
-                        world.addParticle((IParticleData) ModParticles.MYSTIC_WAND_SHOOT, this.posX, this.posY, this.posZ, 0, -0.01f, 0);
+                        //TODO
+                        //world.addParticle((IParticleData) ModParticles.MYSTIC_WAND_SHOOT, this.posX, this.posY, this.posZ, 0, -0.01f, 0);
                     }
             this.setPosition(this.posX, this.posY, this.posZ);
         } else {

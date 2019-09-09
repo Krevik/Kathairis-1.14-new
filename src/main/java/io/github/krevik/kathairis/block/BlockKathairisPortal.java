@@ -228,7 +228,7 @@ public class BlockKathairisPortal extends NetherPortalBlock {
 
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-        /*if (rand.nextInt(100) == 0) {
+        if (rand.nextInt(100) == 0) {
             worldIn.playSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_PORTAL_AMBIENT, SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);
         }
 
@@ -239,9 +239,9 @@ public class BlockKathairisPortal extends NetherPortalBlock {
             double d3 = ((double) rand.nextFloat() - 0.5D) * 0.15D;
             double d4 = ((double) rand.nextFloat() - 0.5D) * 0.15D;
             double d5 = ((double) rand.nextFloat() - 0.5D) * 0.15D;
-			worldIn.addParticle((IParticleData) ModParticles.FAST_PARTICLE,d0,d1,d2,d3,d4,d5);
-        }*/
-		if (rand.nextInt(100) == 0) {
+			//worldIn.addParticle((IParticleData) ModParticles.FAST_PARTICLE,d0,d1,d2,d3,d4,d5);
+        }
+		/*if (rand.nextInt(100) == 0) {
 			worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, SoundEvents.BLOCK_PORTAL_AMBIENT, SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);
 		}
 
@@ -262,7 +262,7 @@ public class BlockKathairisPortal extends NetherPortalBlock {
 			}
 
 			worldIn.addParticle(ParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5);
-		}
+		}*/
 	}
 
 

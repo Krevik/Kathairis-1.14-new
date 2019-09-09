@@ -1,5 +1,6 @@
 package io.github.krevik.kathairis;
 
+import io.github.krevik.kathairis.init.ModParticles;
 import io.github.krevik.kathairis.util.FunctionHelper;
 import io.github.krevik.kathairis.util.ModReference;
 import io.github.krevik.kathairis.util.RenderersRegistry;
@@ -31,10 +32,13 @@ public final class Kathairis {
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClient);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::serverStarting);
+		//ModParticles.registerParticles();
+
 		//ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.GUIFACTORY, ()->GuiOldMan::new);
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
+
 		//StructureCrystalLabirynthPieces.registerStructurePieces();
 		//ModDimensions.KATH_DIM_TYPE=DimensionManager.registerDimension(new ResourceLocation(MOD_ID,"kath_dim_type"), ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)));
 	}

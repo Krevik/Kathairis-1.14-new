@@ -46,9 +46,10 @@ public class RenderersRegistry {
     }
 
     public static void registerParticleRenderers(){
-        Minecraft.getInstance().particles.registerFactory(ModParticles.KATH_PORTAL_PARTICLE,new ParticleKatharianPortal.Factory(new KatharianParticleTexture("kath_portal_particle",true,31)));
-        Minecraft.getInstance().particles.registerFactory(ModParticles.FAST_PARTICLE,new ParticleFast.Factory(new KatharianParticleTexture("fast_particle",false, 1)));
-        Minecraft.getInstance().particles.registerFactory(ModParticles.MYSTIC_WAND_SHOOT,new ParticleMysticWandShoot.Factory(new KatharianParticleTexture("mystic_wand_shoot",true, 6)));
+        //Minecraft.getInstance().particles.registerFactory(ModParticles.FAST_PARTICLE,new ParticleFast.Factory());
+        //Minecraft.getInstance().particles.registerFactory(ModParticles.KATH_PORTAL_PARTICLE,new ParticleKatharianPortal.Factory(new KatharianParticleTexture("kath_portal_particle",true,31)));
+        //Minecraft.getInstance().particles.registerFactory(ModParticles.FAST_PARTICLE,ParticleFast.Factory::new);
+        //Minecraft.getInstance().particles.registerFactory(ModParticles.MYSTIC_WAND_SHOOT,new ParticleMysticWandShoot.Factory(new KatharianParticleTexture("mystic_wand_shoot",true, 6)));
     }
 
 }

@@ -6,6 +6,7 @@ import io.github.krevik.kathairis.entity.*;
 import io.github.krevik.kathairis.entity.butterfly.*;
 import io.github.krevik.kathairis.init.*;
 import io.github.krevik.kathairis.item.*;
+import io.github.krevik.kathairis.particle.ParticleFast;
 import io.github.krevik.kathairis.util.ModReference;
 import io.github.krevik.kathairis.util.ModUtil;
 import io.github.krevik.kathairis.util.networking.PacketHandler;
@@ -25,6 +26,9 @@ import net.minecraft.item.BlockNamedItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Rarity;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.particles.IParticleData;
+import net.minecraft.particles.ParticleType;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
@@ -189,7 +193,7 @@ public final class ModEventSubscriber {
 				setup(new BlockCloudFlower(), "yellow_cloud_flower"),
 				setup(new BlockSnowdropCyprepedium(), "snowdrop_cyprepedium"),
 				setup(new BlockFluoFungi(), "fluo_fungi"),
-				setup(new BlockLayeredSand(), "layered_sand"),
+				setup(new BlockLayeredSand(), "layered_sand"), //TODO ADD LOOT TABLE
 				setup(new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5f, 1.5f).sound(SoundType.STONE)), "kathairis_sandstone"), //TODO: reorganise
 				setup(new BlockForestCandle(), "forest_candle"),
 				setup(new BlockKathairisRocktus(), "rocktus"),
@@ -366,9 +370,9 @@ public final class ModEventSubscriber {
 		);
 	}
 
+
 	@SubscribeEvent
 	public static void onFMLCommonSetup(final FMLCommonSetupEvent event){
-		ModParticles.registerParticles();
 		PacketHandler.register();
 		Kathairis.KATH_DIM_TYPE=DimensionManager.registerDimension(ModReference.KATHAIRIS, ModDimensions.KATHAIRIS, new PacketBuffer(Unpooled.buffer(16)),true);
 	}
