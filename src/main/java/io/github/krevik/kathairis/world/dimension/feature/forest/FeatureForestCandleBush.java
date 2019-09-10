@@ -26,7 +26,7 @@ public class FeatureForestCandleBush extends Feature<BushConfig> {
 
         for(int j = 0; j < 64; ++j) {
             BlockPos blockpos = pos.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
-            if (worldIn.isAirBlock(blockpos) && (!worldIn.getDimension().isNether() || blockpos.getY() < worldIn.getWorld().getHeight() - 1) && iblockstate.isValidPosition(worldIn, blockpos)) {
+            if (worldIn.isAirBlock(blockpos) && (!worldIn.getDimension().isNether() || blockpos.getY() < worldIn.getWorld().getHeight() - 1) && iblockstate.getBlock().isValidPosition(iblockstate,worldIn,blockpos)) {
                 worldIn.setBlockState(blockpos, iblockstate, 2);
                 worldIn.setBlockState(blockpos.up(),state2,2);
                 ++i;

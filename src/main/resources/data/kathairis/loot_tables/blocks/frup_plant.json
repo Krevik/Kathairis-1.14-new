@@ -50,7 +50,7 @@
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "kathairis:frup",
+          "block": "kathairis:frup_plant",
           "properties": {
             "age": "7"
           }

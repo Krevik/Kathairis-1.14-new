@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -25,22 +26,19 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 
-public class EntityCactiSpore extends CreatureEntity
+public class EntityCactiSpore extends MonsterEntity
 {
     private static final DataParameter<Boolean> canDespawn = EntityDataManager.createKey(EntityCactiSpore.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Integer> spikeTimer = EntityDataManager.createKey(EntityCactiSpore.class, DataSerializers.VARINT);
-    private ArrayList<Block> spawnableBlocks;
 
     public EntityCactiSpore(World worldIn)
     {
         super(ModEntities.CACTI_SPORE,worldIn);
         this.experienceValue=30;
-        spawnableBlocks= new ArrayList<>();
-        spawnableBlocks.add(ModBlocks.KATHAIRIS_GRASS);
     }
 
     public EntityCactiSpore(EntityType<? extends LivingEntity> type, World world) {
-        super((EntityType<? extends AnimalEntity>) type, world);
+        super((EntityType<? extends MonsterEntity>) type, world);
     }
 
     @Override
@@ -49,8 +47,7 @@ public class EntityCactiSpore extends CreatureEntity
         int lvt_4_1_ = MathHelper.floor(this.getBoundingBox().minY);
         int lvt_5_1_ = MathHelper.floor(this.posZ);
         BlockPos lvt_6_1_ = new BlockPos(lvt_3_1_, lvt_4_1_, lvt_5_1_);
-        return spawnableBlocks.contains(world.getBlockState(lvt_6_1_.down()).getBlock()) &&
-                this.getBlockPathWeight(new BlockPos(this.posX, this.getBoundingBox().minY, this.posZ), world) >= 0.0F && world.getBlockState((new BlockPos(this)).down()).canEntitySpawn(this.world,getPosition(),ModEntities.CACTI_SPORE);
+        return this.getBlockPathWeight(new BlockPos(this.posX, this.getBoundingBox().minY, this.posZ), world) >= 0.0F && world.getBlockState((new BlockPos(this)).down()).canEntitySpawn(this.world,getPosition(),ModEntities.CACTI_SPORE);
     }
 
     public void deallowDespawning(){

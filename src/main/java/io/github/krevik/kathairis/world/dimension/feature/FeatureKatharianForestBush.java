@@ -35,11 +35,11 @@ public class FeatureKatharianForestBush extends AbstractKatharianTreeFeature {
         int k=rand.nextInt(4);
         if(k==0){
             setLogState1(changedBlocks,worldIn,pos,LOG);
-            setBlockState(worldIn,pos.east(),LEAVES);
-            setBlockState(worldIn,pos.west(),LEAVES);
-            setBlockState(worldIn,pos.south(),LEAVES);
-            setBlockState(worldIn,pos.north(),LEAVES);
-            setBlockState(worldIn,pos.up(),LEAVES);
+            worldIn.setBlockState(pos.east(),LEAVES,2);
+            worldIn.setBlockState(pos.west(),LEAVES,2);
+            worldIn.setBlockState(pos.south(),LEAVES,2);
+            worldIn.setBlockState(pos.north(),LEAVES,2);
+            worldIn.setBlockState(pos.up(),LEAVES,2);
         }
         else if(k==1){
             setLogState1(changedBlocks,worldIn,pos,LOG);

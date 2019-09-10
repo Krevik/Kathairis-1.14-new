@@ -20,14 +20,12 @@ public abstract class AbstractKatharianTreeFeature extends AbstractTreeFeature<N
     }
 
     protected static boolean canGrowInto(IWorldGenerationBaseReader p_214587_0_, BlockPos p_214587_1_) {
-        if (!(p_214587_0_ instanceof net.minecraft.world.IWorldReader)) // FORGE: Redirect to state method when possible
             return p_214587_0_.hasBlockState(p_214587_1_, (p_214573_0_) -> {
                 Block block = p_214573_0_.getBlock();
                 return p_214573_0_.isAir() || p_214573_0_.isIn(BlockTags.LEAVES) || block == Blocks.GRASS_BLOCK ||
                         Block.isDirt(block) || block.isIn(BlockTags.LOGS) || block.isIn(BlockTags.SAPLINGS) || block == Blocks.VINE
                         || block == ModBlocks.KATHAIRIS_DIRT || block== ModBlocks.KATHAIRIS_GRASS;
             });
-        else return p_214587_0_.hasBlockState(p_214587_1_, state -> state.canBeReplacedByLogs((net.minecraft.world.IWorldReader)p_214587_0_, p_214587_1_));
     }
 
 

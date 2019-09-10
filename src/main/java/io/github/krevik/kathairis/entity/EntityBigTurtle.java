@@ -44,7 +44,7 @@ public class EntityBigTurtle extends AnimalEntity
         int lvt_4_1_ = MathHelper.floor(this.getBoundingBox().minY);
         int lvt_5_1_ = MathHelper.floor(this.posZ);
         BlockPos lvt_6_1_ = new BlockPos(lvt_3_1_, lvt_4_1_, lvt_5_1_);
-        return spawnableBlocks.contains(p_205020_1_.getBlockState(lvt_6_1_.down()).getBlock()) && p_205020_1_.getLightSubtracted(lvt_6_1_, 0) > 8 &&
+        return p_205020_1_.getLightSubtracted(lvt_6_1_, 0) > 8 &&
                 this.getBlockPathWeight(new BlockPos(this.posX, this.getBoundingBox().minY, this.posZ), p_205020_1_) >= 0.0F && p_205020_1_.getBlockState((new BlockPos(this)).down()).canEntitySpawn(world,new BlockPos(this).down(),ModEntities.BIG_TURTLE);
     }
 

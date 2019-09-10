@@ -123,7 +123,6 @@ public class BlockBrinePustule extends BlockKathairisPlant implements IGrowable 
 
     @Override
     public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
-        handleFacing(state, worldIn, pos);
         super.onBlockAdded(state, worldIn, pos, oldState, isMoving);
     }
 

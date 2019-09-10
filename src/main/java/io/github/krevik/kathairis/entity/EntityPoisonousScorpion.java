@@ -5,6 +5,7 @@ import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.util.KatharianLootTables;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -14,7 +15,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class EntityPoisonousScorpion extends CreatureEntity
+public class EntityPoisonousScorpion extends MonsterEntity
 {
     public EntityPoisonousScorpion(World worldIn)
     {

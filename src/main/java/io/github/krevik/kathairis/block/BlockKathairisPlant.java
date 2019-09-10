@@ -45,9 +45,13 @@ public class BlockKathairisPlant extends Block implements net.minecraftforge.com
 
 	@Override
 	public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
-		return VoxelShapes.empty();
+		return SHAPE;
 	}
 
+	@Override
+	public VoxelShape getCollisionShape(BlockState p_220071_1_, IBlockReader p_220071_2_, BlockPos p_220071_3_, ISelectionContext p_220071_4_) {
+		return VoxelShapes.empty();
+	}
 
 	@Override
 	public int getOpacity(BlockState state, IBlockReader worldIn, BlockPos pos) {

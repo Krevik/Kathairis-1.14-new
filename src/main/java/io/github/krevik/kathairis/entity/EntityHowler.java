@@ -10,6 +10,7 @@ import io.github.krevik.kathairis.util.KatharianLootTables;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.passive.horse.LlamaEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -26,7 +27,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class EntityHowler extends CreatureEntity
+public class EntityHowler extends MonsterEntity
 {
     private static final DataParameter<Float> animTimer = EntityDataManager.createKey(EntityHowler.class, DataSerializers.FLOAT);
     private static final DataParameter<Float> animTimerTail = EntityDataManager.createKey(EntityHowler.class, DataSerializers.FLOAT);

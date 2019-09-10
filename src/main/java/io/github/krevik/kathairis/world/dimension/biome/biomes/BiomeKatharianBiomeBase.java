@@ -1,6 +1,8 @@
 package io.github.krevik.kathairis.world.dimension.biome.biomes;
 
+import com.google.common.collect.Lists;
 import io.github.krevik.kathairis.init.ModBlocks;
+import io.github.krevik.kathairis.util.FunctionHelper;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianFeatureList;
 import io.github.krevik.kathairis.world.dimension.feature.KatharianMinableConfig;
 import net.minecraft.client.Minecraft;
@@ -18,6 +20,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BiomeKatharianBiomeBase extends Biome {
     public Color baseGrassColor =new Color(66,244,238);
@@ -28,6 +31,20 @@ public class BiomeKatharianBiomeBase extends Biome {
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(KatharianFeatureList.ORE, new KatharianMinableConfig(KatharianMinableConfig.FillerBlockType.NATURAL_STONE, ModBlocks.REVENUM_ORE.getDefaultState(), 18), Placement.COUNT_RANGE, new CountRangeConfig(20, 0, 0, 128)));
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createDecoratedFeature(KatharianFeatureList.KATHARIAN_CRYSTAL_CHAMBER, IFeatureConfig.NO_FEATURE_CONFIG, Placement.CHANCE_HEIGHTMAP, new ChanceConfig(128)));
     }
+
+
+    private static final int MONSTER_SPAWN_WEIGHT = 18;
+
+
+    @Override
+    public List<SpawnListEntry> getSpawns(EntityClassification p_76747_1_) {
+        if (p_76747_1_ == EntityClassification.MONSTER) {
+            FunctionHelper helper = new FunctionHelper();
+            return helper.getRandom().nextInt(MONSTER_SPAWN_WEIGHT) == 0 ? this.getSpawns(p_76747_1_) : Lists.newArrayList();
+        }
+        return super.getSpawns(p_76747_1_);
+    }
+
 
 
 
