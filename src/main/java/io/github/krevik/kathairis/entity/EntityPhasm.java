@@ -138,6 +138,11 @@ public class EntityPhasm extends FlyingEntity implements IMob {
             }
     }*/
 
+    @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_PHASM;
+    }
+
     public boolean attackEntityAsMob(Entity entityIn, float damage)
     {
         float f = 5;

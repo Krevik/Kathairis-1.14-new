@@ -42,6 +42,11 @@ public class EntityFungite extends MonsterEntity
     }
 
     @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_FUNGITE;
+    }
+
+    @Override
     protected void registerAttributes()
     {
         super.registerAttributes();

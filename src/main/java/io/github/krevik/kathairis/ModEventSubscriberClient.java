@@ -12,6 +12,7 @@ import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD;
 
 @Mod.EventBusSubscriber(modid = MOD_ID, bus = MOD, value=Dist.CLIENT)
 public class ModEventSubscriberClient {
+
     @SubscribeEvent
     public static void registerHandlers(FMLLoadCompleteEvent event){
         ModBlocksColorHandler.registerBlockColors();

@@ -121,6 +121,11 @@ public class EntitySkyray extends FlyingEntity
         	}
         }
     }
+
+    @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_SKYRAY;
+    }
     
     public int getAdult()
     {

@@ -56,6 +56,11 @@ public class EntityFlyingSquid extends FlyingEntity
         this.getDataManager().register(canHoldPlayer, Boolean.valueOf(true));
 
     }
+
+    @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_FLYINGSQUID;
+    }
     
     public boolean isDiving() {
         return this.getDataManager().get(isDiving).booleanValue();

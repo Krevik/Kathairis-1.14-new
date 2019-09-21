@@ -73,6 +73,11 @@ public class EntityCloudOister extends AmbientEntity
     }
 
     @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_CLOUDOISTER;
+    }
+
+    @Override
     public int getMaxSpawnedInChunk()
     {
         return 4;

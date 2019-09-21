@@ -33,7 +33,7 @@ public class BiomeKatharianBiomeBase extends Biome {
     }
 
 
-    private static final int MONSTER_SPAWN_WEIGHT = 18;
+    private static final int MONSTER_SPAWN_WEIGHT = 5;
 
 
     @Override

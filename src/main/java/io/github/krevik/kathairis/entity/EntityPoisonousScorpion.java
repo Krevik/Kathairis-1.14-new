@@ -57,6 +57,11 @@ public class EntityPoisonousScorpion extends MonsterEntity
     }
 
     @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_POISONOUSSCORPION;
+    }
+
+    @Override
     protected void registerData()
     {
         super.registerData();

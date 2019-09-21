@@ -52,7 +52,7 @@ public class BlockButterflyFlower extends BlockKathairisPlant {
 			}
 		}
 
-		if (state == BUTTERFLY_FLOWER.getDefaultState().with(BlockButterflyFlower.VARIANT, EnumType.WITH)) {
+		/*if (state == BUTTERFLY_FLOWER.getDefaultState().with(BlockButterflyFlower.VARIANT, EnumType.WITH)) {
 			List<EntityButterfly> e = worldIn.getEntitiesWithinAABB(EntityButterfly.class, new AxisAlignedBB(pos.getX() - 15, pos.getY() - 15, pos.getZ() - 15, pos.getX() + 15, pos.getY() + 15, pos.getZ() + 15));
 			List<EntityButterfly1> e1 = worldIn.getEntitiesWithinAABB(EntityButterfly1.class, new AxisAlignedBB(pos.getX() - 15, pos.getY() - 15, pos.getZ() - 15, pos.getX() + 15, pos.getY() + 15, pos.getZ() + 15));
 
@@ -70,7 +70,7 @@ public class BlockButterflyFlower extends BlockKathairisPlant {
 					}
 				}
 			}
-		}
+		}*/
 	}
 
 	@Override

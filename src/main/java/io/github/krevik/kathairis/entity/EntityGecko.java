@@ -54,6 +54,11 @@ public class EntityGecko extends AnimalEntity {
         goalSelector.addGoal(0, new EntityAIAvoidMovingSandsAndCactus(this,1.2D));
     }
 
+    @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_GECKO;
+    }
+
 
     @Nonnull
     @Override

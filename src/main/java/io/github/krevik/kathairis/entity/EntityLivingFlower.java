@@ -48,6 +48,11 @@ public class EntityLivingFlower extends EntityKatharianAnimal
     }
 
     @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_LIVINGFLOWER;
+    }
+
+    @Override
     public boolean canDespawn(double p_213397_1_) {
         return getDataManager().get(canDespawn).booleanValue();
     }

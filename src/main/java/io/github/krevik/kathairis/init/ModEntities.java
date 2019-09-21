@@ -56,7 +56,7 @@ public class ModEntities {
     public static void registerPlacementTypes(){
         registerPlacementType(COMMON_BUTTERFLY1, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnAnimal);
         registerPlacementType(COMMON_BUTTERFLY2, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnAnimal);
-        registerPlacementType(CLOUD_SHIMMER, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnAnimal);
+        registerPlacementType(CLOUD_SHIMMER, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnNimbus);
         registerPlacementType(ILLUKINI, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnAnimal);
         registerPlacementType(RUBY_SILE, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnAnimal);
         registerPlacementType(SKYLIGHT, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING, SpawnPredicator::canSpawnAnimal);

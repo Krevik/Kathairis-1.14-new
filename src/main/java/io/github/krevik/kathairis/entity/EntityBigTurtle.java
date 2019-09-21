@@ -33,6 +33,11 @@ public class EntityBigTurtle extends AnimalEntity
     }
 
 
+    @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_BIGTURTLE;
+    }
+
     public EntityBigTurtle(EntityType<EntityBigTurtle> type, World world) {
         super(type, world);
     }

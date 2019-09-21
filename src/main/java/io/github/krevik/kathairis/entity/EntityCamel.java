@@ -46,6 +46,11 @@ public class EntityCamel extends AbstractHorseEntity
     }
 
     @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_CAMEL;
+    }
+
+    @Override
     protected void registerAttributes()
     {
         super.registerAttributes();

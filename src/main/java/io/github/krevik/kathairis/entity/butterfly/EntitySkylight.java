@@ -21,28 +21,6 @@ public class EntitySkylight extends EntityMothBase
         super(type, world);
     }
 
-
-    @Override
-    public boolean canSpawn(IWorld p_205020_1_, SpawnReason p_205020_2_) {
-        return super.canSpawn(p_205020_1_, p_205020_2_);
-    }
-
-    @Override
-    public int getMaxSpawnedInChunk()
-    {
-        return 3;
-    }
-
-    @Override
-    protected void collideWithEntity(Entity entityIn)
-    {
-    }
-
-    @Override
-    protected void collideWithNearbyEntities()
-    {
-    }
-
     @Override
     protected void registerAttributes()
     {

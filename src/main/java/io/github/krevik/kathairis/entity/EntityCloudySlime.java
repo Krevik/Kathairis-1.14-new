@@ -93,6 +93,11 @@ public class EntityCloudySlime extends TameableEntity
     }
 
     @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_CLOUDYSLIME;
+    }
+
+    @Override
     public void travel(Vec3d direction) {
         if (this.isInWater()) {
             this.moveRelative(0.02f,new Vec3d(direction.getX(), direction.getY(), direction.getZ()));

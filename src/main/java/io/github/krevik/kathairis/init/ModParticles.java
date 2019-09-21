@@ -22,7 +22,6 @@ public class ModParticles {
         FAST_PARTICLE = register("fast_particle",false);
     }
 
-
     public static BasicParticleType register(String name, boolean alwaysShow) {
         return (BasicParticleType) Registry.<ParticleType<? extends IParticleData>>register(Registry.PARTICLE_TYPE, new ResourceLocation(MOD_ID,name), new BasicParticleType(alwaysShow));
     }

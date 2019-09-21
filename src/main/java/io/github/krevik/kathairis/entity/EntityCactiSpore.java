@@ -50,6 +50,11 @@ public class EntityCactiSpore extends MonsterEntity
         return this.getBlockPathWeight(new BlockPos(this.posX, this.getBoundingBox().minY, this.posZ), world) >= 0.0F && world.getBlockState((new BlockPos(this)).down()).canEntitySpawn(this.world,getPosition(),ModEntities.CACTI_SPORE);
     }
 
+    @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_CACTISPORE;
+    }
+
     public void deallowDespawning(){
         getDataManager().set(canDespawn,false);
     }

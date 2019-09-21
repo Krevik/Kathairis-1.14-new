@@ -8,6 +8,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.passive.AmbientEntity;
+import net.minecraft.entity.passive.BatEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -30,6 +32,7 @@ public class EntityMysticBird extends AmbientEntity
     private static final DataParameter<Integer> VARIANT = EntityDataManager.createKey(EntityMysticBird.class, DataSerializers.VARINT);
     private static final DataParameter<Byte> SITTING = EntityDataManager.createKey(EntityMysticBird.class, DataSerializers.BYTE);
     private BlockPos spawnPosition;
+    private static final EntityPredicate field_213813_c;
 
     public EntityMysticBird(World worldIn)
     {
@@ -37,6 +40,7 @@ public class EntityMysticBird extends AmbientEntity
         this.setIsBirdSitting(true);
         this.experienceValue=5;
     }
+
 
     public EntityMysticBird(EntityType<EntityMysticBird> type, World world) {
         super(type, world);
@@ -147,75 +151,60 @@ public class EntityMysticBird extends AmbientEntity
     }
 
     @Override
-    public void tick()
-    {
+    public void tick() {
         super.tick();
+        if (this.getIsBirdSitting()) {
+            this.setMotion(Vec3d.ZERO);
+            this.posY = (double)MathHelper.floor(this.posY) + 1.0D;
+        } else {
+            this.setMotion(this.getMotion().mul(1.0D, 0.6D, 1.0D));
+        }
 
-        if (this.getIsBirdSitting())
-        {
-            setMotion(new Vec3d(0,0,0));
-            this.posY=this.world.getHeight(Heightmap.Type.MOTION_BLOCKING,this.getPosition()).getY();
-            //this.posY = (double)MathHelper.floor(this.posY) + 1.0D - (double)this.height;
-        }
-        else
-        {
-            setMotionMultiplier(Blocks.AIR.getDefaultState(),new Vec3d(1, 0.6000000238418579D,1));
-        }
     }
 
     @Override
-    protected void updateAITasks()
-    {
+    protected void updateAITasks() {
         super.updateAITasks();
-        BlockPos blockpos = new BlockPos(this);
-        BlockPos blockpos1 = blockpos.down();
-
-        if (this.getIsBirdSitting())
-        {
-            if (this.world.getBlockState(blockpos1).isNormalCube(world,blockpos1))
-            {
-
-                if (this.world.getClosestPlayer(this, 4.0D) != null)
-                {
-                    this.setIsBirdSitting(false);
-                    this.world.playEvent(null, 1025, blockpos, 0);
+        BlockPos lvt_1_1_ = new BlockPos(this);
+        BlockPos lvt_2_1_ = lvt_1_1_.down();
+        if (this.getIsBirdSitting()) {
+            if (this.world.getBlockState(lvt_2_1_).isNormalCube(this.world, lvt_1_1_)) {
+                if (this.rand.nextInt(200) == 0) {
+                    this.rotationYawHead = (float)this.rand.nextInt(360);
                 }
-            }
-            else
-            {
+
+                if (this.world.getClosestPlayer(field_213813_c, this) != null) {
+                    this.setIsBirdSitting(false);
+                    this.world.playEvent((PlayerEntity)null, 1025, lvt_1_1_, 0);
+                }
+            } else {
                 this.setIsBirdSitting(false);
-                this.world.playEvent(null, 1025, blockpos, 0);
+                this.world.playEvent((PlayerEntity)null, 1025, lvt_1_1_, 0);
             }
-        }
-        else
-        {
-            if (this.spawnPosition != null && (!this.world.isAirBlock(this.spawnPosition) || this.spawnPosition.getY() < 1))
-            {
+        } else {
+            if (this.spawnPosition != null && (!this.world.isAirBlock(this.spawnPosition) || this.spawnPosition.getY() < 1)) {
                 this.spawnPosition = null;
             }
 
-            if (this.spawnPosition == null || this.rand.nextInt(30) == 0 || this.spawnPosition.distanceSq((double)((int)this.posX), (double)((int)this.posY), (double)((int)this.posZ),true) < 4.0D)
-            {
-                this.spawnPosition = new BlockPos((int)this.posX + this.rand.nextInt(7) - this.rand.nextInt(7), (int)this.posY + this.rand.nextInt(6) - 2, (int)this.posZ + this.rand.nextInt(7) - this.rand.nextInt(7));
+            if (this.spawnPosition == null || this.rand.nextInt(30) == 0 || this.spawnPosition.withinDistance(this.getPositionVec(), 2.0D)) {
+                this.spawnPosition = new BlockPos(this.posX + (double)this.rand.nextInt(7) - (double)this.rand.nextInt(7), this.posY + (double)this.rand.nextInt(6) - 2.0D, this.posZ + (double)this.rand.nextInt(7) - (double)this.rand.nextInt(7));
             }
 
-            double d0 = (double)this.spawnPosition.getX() + 0.5D - this.posX;
-            double d1 = (double)this.spawnPosition.getY() + 0.1D - this.posY;
-            double d2 = (double)this.spawnPosition.getZ() + 0.5D - this.posZ;
-            double motionX = getMotion().getX() + (Math.signum(d0) * 0.5D - this.getMotion().getX()) * 0.10000000149011612D;
-            double motionY = getMotion().getY() +(Math.signum(d1) * 0.699999988079071D - this.getMotion().getY()) * 0.10000000149011612D;
-            double motionZ = getMotion().getZ() +(Math.signum(d2) * 0.5D - this.getMotion().getZ()) * 0.10000000149011612D;
-            setMotion(new Vec3d(motionX,motionY,motionZ));
-            float f = (float)(MathHelper.atan2(this.getMotion().getZ(), this.getMotion().getX()) * (180D / Math.PI)) - 90.0F;
-            float f1 = MathHelper.wrapDegrees(f - this.rotationYaw);
+            double lvt_3_1_ = (double)this.spawnPosition.getX() + 0.5D - this.posX;
+            double lvt_5_1_ = (double)this.spawnPosition.getY() + 0.1D - this.posY;
+            double lvt_7_1_ = (double)this.spawnPosition.getZ() + 0.5D - this.posZ;
+            Vec3d lvt_9_1_ = this.getMotion();
+            Vec3d lvt_10_1_ = lvt_9_1_.add((Math.signum(lvt_3_1_) * 0.5D - lvt_9_1_.x) * 0.10000000149011612D, (Math.signum(lvt_5_1_) * 0.699999988079071D - lvt_9_1_.y) * 0.10000000149011612D, (Math.signum(lvt_7_1_) * 0.5D - lvt_9_1_.z) * 0.10000000149011612D);
+            this.setMotion(lvt_10_1_);
+            float lvt_11_1_ = (float)(MathHelper.atan2(lvt_10_1_.z, lvt_10_1_.x) * 57.2957763671875D) - 90.0F;
+            float lvt_12_1_ = MathHelper.wrapDegrees(lvt_11_1_ - this.rotationYaw);
             this.moveForward = 0.5F;
-            this.rotationYaw += f1;
-
-            if (this.rand.nextInt(100) == 0 && this.world.getBlockState(blockpos1).isNormalCube(world,blockpos1)&&!(this.world.getBlockState(blockpos1).getBlock() instanceof BlockKathairisPlant))
-            {
+            this.rotationYaw += lvt_12_1_;
+            if (this.rand.nextInt(100) == 0 && this.world.getBlockState(lvt_2_1_).isNormalCube(this.world, lvt_2_1_)) {
                 this.setIsBirdSitting(true);
             }
         }
+
     }
 
     @Override
@@ -227,6 +216,11 @@ public class EntityMysticBird extends AmbientEntity
     @Override
     public void fall(float distance, float damageMultiplier)
     {
+    }
+
+    @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_MYSTICBIRD;
     }
 
     @Override
@@ -256,6 +250,10 @@ public class EntityMysticBird extends AmbientEntity
 
             return super.attackEntityFrom(source, amount);
         }
+    }
+
+    static {
+        field_213813_c = (new EntityPredicate()).setDistance(4.0D).allowFriendlyFire();
     }
 
     @Override

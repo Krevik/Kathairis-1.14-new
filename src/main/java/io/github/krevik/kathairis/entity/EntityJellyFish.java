@@ -98,6 +98,11 @@ public class EntityJellyFish extends CreatureEntity
         return this.randomMotionVecX != 0.0F || this.randomMotionVecY != 0.0F || this.randomMotionVecZ != 0.0F;
     }
 
+    @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_JELLYFISH;
+    }
+
 
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount)

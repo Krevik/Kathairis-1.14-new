@@ -88,6 +88,11 @@ public class EntityHowler extends MonsterEntity
     }
 
     @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_HOWLER;
+    }
+
+    @Override
     protected void registerData()
     {
         super.registerData();
@@ -194,14 +199,6 @@ public class EntityHowler extends MonsterEntity
     public CreatureAttribute getCreatureAttribute()
     {
         return CreatureAttribute.UNDEAD;
-    }
-
-    @Nullable
-    @Override
-    protected ResourceLocation getLootTable()
-    {
-        return null;
-        //return KatharianLootTables.LOOT_HOWLER;
     }
 
 

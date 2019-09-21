@@ -43,6 +43,11 @@ public class EntityBison extends EntityKatharianAnimal
         this.experienceValue=30;
     }
 
+    @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_BISON;
+    }
+
 
     public EntityBison(EntityType<EntityBison> entityBisonEntityType, World world) {
         super(entityBisonEntityType, world);

@@ -44,6 +44,11 @@ public class EntityGaznowel extends FlyingEntity implements IRangedAttackMob, IM
 
     }
 
+    @Override
+    protected ResourceLocation getLootTable() {
+        return KatharianLootTables.LOOT_GAZNOWEL;
+    }
+
     public EntityGaznowel(EntityType<EntityGaznowel> type, World world) {
         super(type, world);
     }

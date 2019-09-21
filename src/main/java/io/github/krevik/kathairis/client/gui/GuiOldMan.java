@@ -6,6 +6,8 @@ import io.github.krevik.kathairis.util.networking.PacketHandler;
 import io.github.krevik.kathairis.util.networking.packets.PacketServerGivePlayerEthereal;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.recipebook.FurnaceRecipeGui;
+import net.minecraft.client.gui.screen.EditBookScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.resources.I18n;
@@ -49,6 +51,13 @@ public class GuiOldMan extends Screen {
 
     public GuiOldMan(){
         super(new StringTextComponent("kathairis:gui_old_man"));
+
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        this.minecraft.keyboardListener.enableRepeatEvents(true);
         guiTitle=I18n.format("gui.old_man.title");
         for(int i=0;i<=7;i++){
             main_page_lines[i]=I18n.format("gui.old_man.main_page.line_"+i);
@@ -77,10 +86,10 @@ public class GuiOldMan extends Screen {
         mode=0;
         buttons.clear();
         //missing par = 20
-        this.Next = this.addButton(new Button(1,ImageWidth/2+margin*2, (height-ImageHeight/2-margin+margin), 80, nextButtonTitle, (p_214274_1_) -> {
+        this.Next = this.addButton(new Button(this.width / 2 ,196, 98, 20, nextButtonTitle, (p_214274_1_) -> {
             this.setMode(1);
         }));
-        this.Back = this.addButton(new Button(2,ImageWidth/2+margin*2, (height-ImageHeight/2-margin+margin*9), 60, backButtonTitle, (p_214274_1_) -> {
+        this.Back = this.addButton(new Button(this.width / 2 - 100,196, 98, 20, backButtonTitle, (p_214274_1_) -> {
             if(mode==0) {
                 Minecraft.getInstance().player.closeScreen();
             }
@@ -94,16 +103,16 @@ public class GuiOldMan extends Screen {
                 Minecraft.getInstance().player.closeScreen();
             }
         }));
-        this.Knowledge = this.addButton(new Button(3,ImageWidth/2+margin*2, (height-ImageHeight/2-margin+margin*3), 80, knowledge_Button_Title, (p_214274_1_) -> {
+        this.Knowledge = this.addButton(new Button(this.width / 2 + 100,100, 98, 20, knowledge_Button_Title, (p_214274_1_) -> {
             GuiOldMan.this.setMode(2);
         }));
-        this.Power = this.addButton(new Button(4,ImageWidth/2+margin*2, (height-ImageHeight/2-margin+margin*5), 60,  power_Button_Title, (p_214274_1_) -> {
+        this.Power = this.addButton(new Button(this.width / 2 + 100,120, 98, 20,  power_Button_Title, (p_214274_1_) -> {
             GuiOldMan.this.setMode(3);
         }));
-        this.Adventure = this.addButton(new Button(5,ImageWidth/2+margin*2, (height-ImageHeight/2-margin+margin*7), 60,  adventure_Button_Title, (p_214274_1_) -> {
+        this.Adventure = this.addButton(new Button(this.width / 2 + 100,140, 98, 20,  adventure_Button_Title, (p_214274_1_) -> {
             GuiOldMan.this.setMode(4);
         }));
-        this.I_Want_Ethereal = this.addButton(new Button(6,ImageWidth/2+margin*2, (height-ImageHeight/2-margin+margin*5), 60, i_Want_Ethereal_Button_Title, (p_214274_1_) -> {
+        this.I_Want_Ethereal = this.addButton(new Button(this.width / 2 + 100,160, 98, 20, i_Want_Ethereal_Button_Title, (p_214274_1_) -> {
             GuiOldMan.this.setMode(5);
             PacketHandler.sendToServer(new PacketServerGivePlayerEthereal());
         }));
@@ -181,6 +190,7 @@ public class GuiOldMan extends Screen {
         GlStateManager.scalef(1.25f,1.25f,1.25f);
     }
 
+
     @Override
     public void render(int parWidth, int parHeight, float particle) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -217,7 +227,6 @@ public class GuiOldMan extends Screen {
                 this.drawString(this.font, i_want_ethereal_lines[i-1], (int) (margin*1.75), height -ImageHeight/2+margin*i, 0X747474);
             }
         }
-
         super.render(parWidth, parHeight, particle);
     }
 
