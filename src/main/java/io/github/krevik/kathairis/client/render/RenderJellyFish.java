@@ -6,13 +6,14 @@ import io.github.krevik.kathairis.util.TextureLocationsRef;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderJellyFish extends LivingRenderer<EntityJellyFish, ModelJellyFish<EntityJellyFish>>
+public class RenderJellyFish extends MobRenderer<EntityJellyFish, ModelJellyFish<EntityJellyFish>>
 {
     public static final Factory FACTORY = new Factory();
 

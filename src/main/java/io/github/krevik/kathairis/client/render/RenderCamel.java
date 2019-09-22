@@ -7,13 +7,14 @@ import io.github.krevik.kathairis.util.TextureLocationsRef;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderCamel extends LivingRenderer<EntityCamel,ModelCamel<EntityCamel>>
+public class RenderCamel extends MobRenderer<EntityCamel,ModelCamel<EntityCamel>>
 {
 	
     public static final Factory FACTORY = new Factory();

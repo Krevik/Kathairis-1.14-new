@@ -1,5 +1,6 @@
 package io.github.krevik.kathairis.world.dimension.feature;
 
+import io.github.krevik.kathairis.world.dimension.feature.carver.KatharianWorldCaveCarver;
 import io.github.krevik.kathairis.world.dimension.feature.desert.*;
 import io.github.krevik.kathairis.world.dimension.feature.floating_islands.FeatureHugeFloatingIsland;
 import io.github.krevik.kathairis.world.dimension.feature.forest.FeatureForestCandleBush;
@@ -7,6 +8,7 @@ import io.github.krevik.kathairis.world.dimension.feature.forest.FeatureSteppedS
 import io.github.krevik.kathairis.world.dimension.feature.plainfields.FeaturePlainFields;
 import io.github.krevik.kathairis.world.dimension.feature.rewarding.FeatureKatharianCloudRuins;
 import io.github.krevik.kathairis.world.dimension.feature.rewarding.FeatureKatharianFloatingMiniIsland;
+import io.github.krevik.kathairis.world.dimension.feature.rewarding.FeatureSmallRuins;
 import io.github.krevik.kathairis.world.dimension.feature.rewarding.FeatureSoulCloudWithChests;
 import io.github.krevik.kathairis.world.dimension.feature.swamp.FeatureBasicSwamp;
 import io.github.krevik.kathairis.world.dimension.feature.tree.*;
@@ -54,6 +56,7 @@ public class KatharianFeatureList {
     public static final Feature<KatharianMinableConfig> ORE = registerFeature("ore", new BasicKatharianOreFeature(KatharianMinableConfig::deserialize));
     public static final Feature<NoFeatureConfig> FEATURE_SOUL_CLOUD_WITH_CHESTS = registerFeature("soul_clouds_with_chests",new FeatureSoulCloudWithChests(NoFeatureConfig::deserialize));
     public static final Feature<NoFeatureConfig> FEATURE_CLOUD_RUINS = registerFeature("cloud_ruins",new FeatureKatharianCloudRuins(NoFeatureConfig::deserialize));
+    public static final Feature<NoFeatureConfig> FEATURE_SMALL_RUINS = registerFeature("small_ruins",new FeatureSmallRuins(NoFeatureConfig::deserialize));
 
     public static final SurfaceBuilder<SurfaceBuilderConfig> KATHARIAN_SWAMP_SURFACE_BUILDER = registerSurfaceBuilder("swamp", new KathairisSwampSurfaceBuilder(SurfaceBuilderConfig::deserialize));
     public static final SurfaceBuilder<SurfaceBuilderConfig> KATHARIAN_DESERT_EDGE_SURFACE_BUILDER = registerSurfaceBuilder("desert_edge", new KatharianDesertEdgeSurfaceBuilder(SurfaceBuilderConfig::deserialize));

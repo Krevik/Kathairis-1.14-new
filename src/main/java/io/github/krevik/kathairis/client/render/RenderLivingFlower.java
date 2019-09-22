@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -17,7 +18,7 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 import org.lwjgl.opengl.GL11;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderLivingFlower extends LivingRenderer<EntityLivingFlower,ModelLivingFlower<EntityLivingFlower>>
+public class RenderLivingFlower extends MobRenderer<EntityLivingFlower,ModelLivingFlower<EntityLivingFlower>>
 {
     public static final Factory FACTORY = new Factory();
 

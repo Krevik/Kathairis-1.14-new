@@ -1,4 +1,4 @@
-package io.github.krevik.kathairis.world.dimension.feature;
+package io.github.krevik.kathairis.world.dimension.feature.carver;
 
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.util.math.MathHelper;

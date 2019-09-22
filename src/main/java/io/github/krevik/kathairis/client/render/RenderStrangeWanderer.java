@@ -6,6 +6,7 @@ import io.github.krevik.kathairis.util.TextureLocationsRef;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -14,7 +15,7 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 import java.util.Calendar;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderStrangeWanderer extends LivingRenderer<EntityStrangeWanderer, ModelStrangeWanderer<EntityStrangeWanderer>>
+public class RenderStrangeWanderer extends MobRenderer<EntityStrangeWanderer, ModelStrangeWanderer<EntityStrangeWanderer>>
 {
     public static final Factory FACTORY = new Factory();
 
