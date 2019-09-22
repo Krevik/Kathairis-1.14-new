@@ -1,10 +1,8 @@
 package io.github.krevik.kathairis.client.render;
 
-import io.github.krevik.kathairis.entity.EntityGaznowel;
 import io.github.krevik.kathairis.entity.EntityMysticWandShoot;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.entity.projectile.DragonFireballEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;

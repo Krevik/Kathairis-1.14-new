@@ -1,15 +1,8 @@
 package io.github.krevik.kathairis.entity.butterfly;
 
-import io.github.krevik.kathairis.util.KatharianLootTables;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
 
 public class EntityMothBase extends EntityBasicButterfly
 {

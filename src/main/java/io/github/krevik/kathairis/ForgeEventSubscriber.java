@@ -1,18 +1,6 @@
 package io.github.krevik.kathairis;
 
-import io.github.krevik.kathairis.init.ModItems;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.potion.Potion;
-import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-
-import java.util.ArrayList;
-import java.util.Random;
 
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.FORGE;

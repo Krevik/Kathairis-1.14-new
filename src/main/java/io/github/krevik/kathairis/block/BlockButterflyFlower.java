@@ -1,7 +1,5 @@
 package io.github.krevik.kathairis.block;
 
-import io.github.krevik.kathairis.entity.butterfly.EntityButterfly;
-import io.github.krevik.kathairis.entity.butterfly.EntityButterfly1;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,7 +17,6 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.List;
 import java.util.Random;
 
 import static io.github.krevik.kathairis.init.ModBlocks.BUTTERFLY_FLOWER;

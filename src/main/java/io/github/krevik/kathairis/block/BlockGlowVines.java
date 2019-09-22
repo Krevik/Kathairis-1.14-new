@@ -19,7 +19,6 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 

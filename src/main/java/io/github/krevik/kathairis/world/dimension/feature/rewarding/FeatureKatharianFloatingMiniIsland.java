@@ -1,4 +1,4 @@
-package io.github.krevik.kathairis.world.dimension.feature;
+package io.github.krevik.kathairis.world.dimension.feature.rewarding;
 
 import com.mojang.datafixers.Dynamic;
 import io.github.krevik.kathairis.init.ModBlocks;
@@ -25,7 +25,6 @@ public class FeatureKatharianFloatingMiniIsland extends Feature<NoFeatureConfig>
 
     @Override
     public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> c, Random rand, BlockPos pos, NoFeatureConfig p_212245_5_) {
-      if(rand.nextInt(200)==0) {
           BlockState cloudState = rand.nextInt(2) == 0 ? ModBlocks.YELLOW_CLOUD.getDefaultState() : ModBlocks.BLUE_CLOUD.getDefaultState();
           int height = 150 + rand.nextInt(25) + rand.nextInt(25) + rand.nextInt(25) + rand.nextInt(25);
           int startRadius = 3 + rand.nextInt(6);
@@ -66,8 +65,6 @@ public class FeatureKatharianFloatingMiniIsland extends Feature<NoFeatureConfig>
               }
           }
           return true;
-      }
-      return false;
     }
 
 

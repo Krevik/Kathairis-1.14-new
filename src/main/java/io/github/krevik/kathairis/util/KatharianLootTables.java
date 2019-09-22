@@ -1,11 +1,7 @@
 package io.github.krevik.kathairis.util;
 
 
-import com.google.common.collect.Sets;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.LootTables;
-
-import java.util.Set;
 
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 

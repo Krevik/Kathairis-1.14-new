@@ -1,6 +1,5 @@
 package io.github.krevik.kathairis.world.dimension;
 
-import io.github.krevik.kathairis.init.ModDimensions;
 import io.github.krevik.kathairis.util.ModReference;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;

@@ -12,7 +12,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.ObjectHolder;

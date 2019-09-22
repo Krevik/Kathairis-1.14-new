@@ -2,10 +2,8 @@ package io.github.krevik.kathairis.util.networking.packets;
 
 import io.github.krevik.kathairis.enchantement.KathairisEnchantments;
 import net.minecraft.enchantment.EnchantmentData;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.EnchantedBookItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.PacketBuffer;

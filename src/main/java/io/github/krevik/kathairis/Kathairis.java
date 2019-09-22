@@ -1,6 +1,5 @@
 package io.github.krevik.kathairis;
 
-import io.github.krevik.kathairis.init.ModParticles;
 import io.github.krevik.kathairis.util.FunctionHelper;
 import io.github.krevik.kathairis.util.ModReference;
 import io.github.krevik.kathairis.util.RenderersRegistry;

@@ -13,8 +13,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
-
 public class EntityPoisonousScorpion extends MonsterEntity
 {
     public EntityPoisonousScorpion(World worldIn)

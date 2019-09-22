@@ -22,7 +22,6 @@ import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
 
-import javax.annotation.Nullable;
 import java.util.EnumSet;
 
 public class EntityFlyingSquid extends FlyingEntity

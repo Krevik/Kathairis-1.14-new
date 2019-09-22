@@ -7,7 +7,6 @@ import io.github.krevik.kathairis.util.networking.packets.PacketServerGivePlayer
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.VideoSettingsScreen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;

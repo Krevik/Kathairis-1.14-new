@@ -1,7 +1,6 @@
 package io.github.krevik.kathairis.entity;
 
 import io.github.krevik.kathairis.init.ModEntities;
-import io.github.krevik.kathairis.init.ModParticles;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -9,7 +8,6 @@ import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.network.IPacket;
-import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;

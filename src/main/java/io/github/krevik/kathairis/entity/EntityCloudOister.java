@@ -29,8 +29,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
-
 public class EntityCloudOister extends AmbientEntity
 {
     private static final DataParameter<Integer> timeUntilNextPearl = EntityDataManager.createKey(EntityCloudOister.class, DataSerializers.VARINT);

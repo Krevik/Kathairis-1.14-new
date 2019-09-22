@@ -1,14 +1,11 @@
 package io.github.krevik.kathairis.entity;
 
-import io.github.krevik.kathairis.init.ModBlocks;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.util.KatharianLootTables;
-import net.minecraft.block.Block;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
@@ -22,9 +19,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
-import java.util.ArrayList;
 
 public class EntityCactiSpore extends MonsterEntity
 {

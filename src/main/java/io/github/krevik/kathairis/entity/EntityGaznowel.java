@@ -27,7 +27,6 @@ import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
 import javax.vecmath.Vector3d;
 import java.util.EnumSet;
 

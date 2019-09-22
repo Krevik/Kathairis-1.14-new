@@ -14,7 +14,6 @@ import net.minecraft.world.IWorldWriter;
 import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.TreeFeature;
 
 import java.util.Random;
 import java.util.Set;

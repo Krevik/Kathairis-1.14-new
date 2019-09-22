@@ -1,13 +1,9 @@
 package io.github.krevik.kathairis.world.dimension;
 
-import io.github.krevik.kathairis.Kathairis;
-import io.github.krevik.kathairis.init.ModDimensions;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.NetherPortalBlock;
 import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.server.*;
@@ -21,9 +17,6 @@ import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.WorldInfo;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.fml.hooks.BasicEventHooks;
-import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 

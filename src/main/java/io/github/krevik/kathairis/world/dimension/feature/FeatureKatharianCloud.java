@@ -48,11 +48,9 @@ public class FeatureKatharianCloud extends Feature<NoFeatureConfig> {
 
     @Override
     public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random random, BlockPos pos, NoFeatureConfig config) {
-        if(random.nextInt(5)==0) {
             BlockState block = random.nextInt(2)==0 ? ModBlocks.BLUE_CLOUD.getDefaultState() : ModBlocks.YELLOW_CLOUD.getDefaultState();
             int height = 100+random.nextInt(24)+random.nextInt(24)+random.nextInt(24)+random.nextInt(24)+random.nextInt(24);
             generateCloud(world,new BlockPos(pos.getX(),height,pos.getZ()),2+random.nextInt(7),random,block,0);
-        }
         return false;
     }
 }

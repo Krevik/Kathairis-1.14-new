@@ -4,7 +4,6 @@ import io.github.krevik.kathairis.entity.ai.EntityAIAvoidMovingSandsAndCactus;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.util.KatharianLootTables;
 import net.minecraft.entity.CreatureAttribute;
-import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.goal.*;
@@ -12,8 +11,6 @@ import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
 
 public class EntityFungite extends MonsterEntity
 {

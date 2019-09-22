@@ -4,7 +4,6 @@ import com.mojang.datafixers.Dynamic;
 import io.github.krevik.kathairis.block.BlockGlowVines;
 import io.github.krevik.kathairis.init.ModBlocks;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.MutableBoundingBox;

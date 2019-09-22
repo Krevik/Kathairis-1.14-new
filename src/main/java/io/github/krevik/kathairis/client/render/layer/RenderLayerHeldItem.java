@@ -2,17 +2,13 @@ package io.github.krevik.kathairis.client.render.layer;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import io.github.krevik.kathairis.client.model.ModelGaznowel;
-import io.github.krevik.kathairis.entity.EntityGaznowel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
-import net.minecraft.client.renderer.entity.LivingRenderer;
-import net.minecraft.client.renderer.entity.layers.HeldItemLayer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.entity.model.IHasArm;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.HandSide;
 import net.minecraftforge.api.distmarker.Dist;

@@ -9,7 +9,6 @@ import io.github.krevik.kathairis.init.ModSounds;
 import io.github.krevik.kathairis.util.KatharianLootTables;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

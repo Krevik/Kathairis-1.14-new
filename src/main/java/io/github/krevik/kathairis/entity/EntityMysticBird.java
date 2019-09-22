@@ -1,14 +1,11 @@
 package io.github.krevik.kathairis.entity;
 
-import io.github.krevik.kathairis.block.BlockKathairisPlant;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.init.ModSounds;
 import io.github.krevik.kathairis.util.KatharianLootTables;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.passive.AmbientEntity;
-import net.minecraft.entity.passive.BatEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
@@ -23,7 +20,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.Heightmap;
 
 import javax.annotation.Nullable;
 

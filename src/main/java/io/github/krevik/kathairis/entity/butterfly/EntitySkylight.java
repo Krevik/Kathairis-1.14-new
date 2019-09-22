@@ -1,11 +1,8 @@
 package io.github.krevik.kathairis.entity.butterfly;
 
 import io.github.krevik.kathairis.init.ModEntities;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 public class EntitySkylight extends EntityMothBase

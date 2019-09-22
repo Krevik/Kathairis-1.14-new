@@ -5,11 +5,8 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.SwordItem;
-import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.potion.Potion;
 
 /**
  * @author Krevik

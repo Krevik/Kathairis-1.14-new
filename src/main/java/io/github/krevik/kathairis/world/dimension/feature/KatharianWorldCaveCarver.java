@@ -1,13 +1,14 @@
 package io.github.krevik.kathairis.world.dimension.feature;
 
 import com.mojang.datafixers.Dynamic;
-import java.util.BitSet;
-import java.util.Random;
-import java.util.function.Function;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
+
+import java.util.BitSet;
+import java.util.Random;
+import java.util.function.Function;
 
 public class KatharianWorldCaveCarver extends WorldCarver<ProbabilityConfig> {
     public KatharianWorldCaveCarver(Function<Dynamic<?>, ? extends ProbabilityConfig> p_i49929_1_, int p_i49929_2_) {

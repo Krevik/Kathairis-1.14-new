@@ -48,7 +48,7 @@ public class FeatureKatharianSoulTree extends AbstractKatharianTreeFeature {
                 BlockPos actualPos = new BlockPos(posX+shifterX,posY+y,posZ+shifterZ);
                 setBlocks(changedBlocks,worldIn,actualPos,LOG);
             }
-            generateCrown(worldIn,new BlockPos(posX+shifterX,posY+mainBranchHeight,posZ+shifterZ),(int)(1+mainBranchHeight/2.5),rand);
+            generateCrown(worldIn,new BlockPos(posX+shifterX,posY+mainBranchHeight,posZ+shifterZ),(int)(2+mainBranchHeight/2),rand);
             return true;
         }
         return false;

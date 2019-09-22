@@ -3,7 +3,6 @@ package io.github.krevik.kathairis.entity;
 import io.github.krevik.kathairis.enchantement.KathairisEnchantments;
 import io.github.krevik.kathairis.init.ModEntities;
 import io.github.krevik.kathairis.init.ModSounds;
-import io.github.krevik.kathairis.util.KatharianLootTables;
 import io.github.krevik.kathairis.util.networking.PacketHandler;
 import io.github.krevik.kathairis.util.networking.packets.PacketClientOpenGuiOldMan;
 import net.minecraft.enchantment.Enchantment;

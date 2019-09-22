@@ -1,6 +1,9 @@
 package io.github.krevik.kathairis.particle;
 
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.IAnimatedSprite;
+import net.minecraft.client.particle.IParticleFactory;
+import net.minecraft.client.particle.IParticleRenderType;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.particles.BasicParticleType;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;

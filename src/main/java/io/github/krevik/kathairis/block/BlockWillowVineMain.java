@@ -14,9 +14,6 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_DIRT;
-import static io.github.krevik.kathairis.init.ModBlocks.KATHAIRIS_GRASS;
-
 public class BlockWillowVineMain extends BlockKathairisPlant implements IGrowable {
 
 

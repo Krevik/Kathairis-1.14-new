@@ -1,10 +1,8 @@
 package io.github.krevik.kathairis.particle;
 
 import com.mojang.blaze3d.platform.GlStateManager;
-import io.github.krevik.kathairis.init.ModParticles;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.IParticleRenderType;
-import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.SpriteTexturedParticle;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.BufferBuilder;
