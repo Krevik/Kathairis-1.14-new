@@ -21,6 +21,8 @@ public class ModBlocksColorHandler implements IBlockColor
     public static void registerBlockColors()
     {
         Minecraft.getInstance().getBlockColors().register(INSTANCE, ModBlocks.KATHAIRIS_GRASS);
+        Minecraft.getInstance().getBlockColors().register(INSTANCE, ModBlocks.KATHAIRIS_MINI_GRASS);
+        Minecraft.getInstance().getBlockColors().register(INSTANCE, ModBlocks.KATHAIRIS_TALL_GRASS);
     }
 
     @Override
