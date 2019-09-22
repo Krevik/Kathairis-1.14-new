@@ -32,8 +32,6 @@ public final class Kathairis {
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClient);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::serverStarting);
-		//ModParticles.registerParticles();
-
 		//ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.GUIFACTORY, ()->GuiOldMan::new);
 	}
 

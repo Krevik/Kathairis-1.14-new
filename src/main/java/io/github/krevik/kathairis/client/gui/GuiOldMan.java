@@ -6,9 +6,8 @@ import io.github.krevik.kathairis.util.networking.PacketHandler;
 import io.github.krevik.kathairis.util.networking.packets.PacketServerGivePlayerEthereal;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.recipebook.FurnaceRecipeGui;
-import net.minecraft.client.gui.screen.EditBookScreen;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.VideoSettingsScreen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
@@ -24,7 +23,7 @@ public class GuiOldMan extends Screen {
 
 
     Minecraft mc = Minecraft.getInstance();
-    private final int ImageHeight = 340, ImageWidth = 704, ImageScale = 250;
+    private int shifter1 = 200, ImageWidth = 704, ImageScale = 250;
     private static final ResourceLocation GUITextures = new ResourceLocation(MOD_ID,"textures/gui/oldman.png");
     private static int mode=0;
     private Button Next;
@@ -48,6 +47,7 @@ public class GuiOldMan extends Screen {
     private String[] power_lines=new String[8];
     private String[] knowledge_lines=new String[8];
     private String[] i_want_ethereal_lines=new String[8];
+    private int guiScale;
 
     public GuiOldMan(){
         super(new StringTextComponent("kathairis:gui_old_man"));
@@ -85,11 +85,10 @@ public class GuiOldMan extends Screen {
 
         mode=0;
         buttons.clear();
-        //missing par = 20
-        this.Next = this.addButton(new Button(this.width / 2 ,196, 98, 20, nextButtonTitle, (p_214274_1_) -> {
+        this.Next = this.addButton(new Button(this.width / 2 - 100,280, 98, 20, nextButtonTitle, (p_214274_1_) -> {
             this.setMode(1);
         }));
-        this.Back = this.addButton(new Button(this.width / 2 - 100,196, 98, 20, backButtonTitle, (p_214274_1_) -> {
+        this.Back = this.addButton(new Button(this.width / 2,280, 98, 20, backButtonTitle, (p_214274_1_) -> {
             if(mode==0) {
                 Minecraft.getInstance().player.closeScreen();
             }
@@ -112,7 +111,7 @@ public class GuiOldMan extends Screen {
         this.Adventure = this.addButton(new Button(this.width / 2 + 100,140, 98, 20,  adventure_Button_Title, (p_214274_1_) -> {
             GuiOldMan.this.setMode(4);
         }));
-        this.I_Want_Ethereal = this.addButton(new Button(this.width / 2 + 100,160, 98, 20, i_Want_Ethereal_Button_Title, (p_214274_1_) -> {
+        this.I_Want_Ethereal = this.addButton(new Button(this.width / 2 + 150,160, 98, 20, i_Want_Ethereal_Button_Title, (p_214274_1_) -> {
             GuiOldMan.this.setMode(5);
             PacketHandler.sendToServer(new PacketServerGivePlayerEthereal());
         }));
@@ -124,9 +123,29 @@ public class GuiOldMan extends Screen {
 
     @Override
     public void tick() {
+        guiScale=mc.gameSettings.guiScale;
+        if(guiScale==1){
+            shifter1=900;
+            Back.y=280;
+            Next.y=280;
+        }
+        if(guiScale==2){
+            shifter1=350;
+            Back.y=280;
+            Next.y=280;
+        }
+        if(guiScale==3){
+            shifter1=150;
+            Back.y=280;
+            Next.y=280;
+        }
+        if(guiScale==4){
+            shifter1=200;
+            Back.y=150;
+            Next.y=150;
+        }
         Back.visible=true;
         Back.active=true;
-
         Knowledge.visible=false;
         Knowledge.active=false;
         Power.visible=false;
@@ -179,52 +198,49 @@ public class GuiOldMan extends Screen {
             Adventure.visible=false;
             Adventure.active=false;
         }
-
-
     }
 
+    @Override
     public void drawCenteredString(FontRenderer fontRendererIn, String text, int x, int y, int color)
     {
-        GlStateManager.scalef(0.8f,0.8f,0.8f);
-        fontRendererIn.drawString(text, (x - fontRendererIn.getStringWidth(text) / 2), y, color);
-        GlStateManager.scalef(1.25f,1.25f,1.25f);
+        fontRendererIn.drawString(text, (width/2-fontRendererIn.getStringWidth(text)/2), y, color);
     }
-
 
     @Override
     public void render(int parWidth, int parHeight, float particle) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.enableColorMaterial();
-        this.mc.getTextureManager().bindTexture(GUITextures);
-        //TODO //drawModalRectWithCustomSizedTexture(margin, height-ImageHeight/2-margin, 0, 0, ImageWidth/2,ImageHeight/2,ImageWidth/2,ImageHeight/2);
-        this.drawString(this.font, guiTitle, (int)(margin*1.65), (int) (height -ImageHeight/2-margin*0.4), 0X191414);
+        //this.mc.getTextureManager().bindTexture(GUITextures);
+        this.renderBackground();
+        //TODO //drawModalRectWithCustomSizedTexture(margin, height-shifter1/2-margin, 0, 0, ImageWidth/2,shifter1/2,ImageWidth/2,shifter1/2);
+        this.drawCenteredString(this.font, guiTitle, (int)(0), (int) (height - shifter1 - margin*0.4), 0XFFFFFF);
         if(mode==0){
-            this.drawString(this.font, hello_Player_Title +", "+ Minecraft.getInstance().player.getName().getFormattedText() +".", (int) (margin*1.75), height-ImageHeight/2+margin, 0X747474);
+            this.drawCenteredString(this.font, hello_Player_Title +", "+ Minecraft.getInstance().player.getName().getFormattedText() +".", (int) (0), height- shifter1 +margin, 0X747474);
             for(int i=2;i<=9;i++){
-                this.drawString(this.font, main_page_lines[i-2], (int) (margin*1.75), height -ImageHeight/2+margin*i, 0X747474);
+                this.drawCenteredString(this.font, main_page_lines[i-2], (int) (0), height - shifter1 +margin*i, 0X747474);
             }
         }
         if(mode==1) {
-            this.drawString(this.font, asked_question, (int) (margin*1.75), height -ImageHeight/2+margin, 0X747474);
+            this.drawCenteredString(this.font, asked_question, (int) (0), height - shifter1 +margin, 0X747474);
         }
         if(mode==2) {
             for(int i=1;i<=8;i++){
-                this.drawString(this.font, knowledge_lines[i-1], (int) (margin*1.75), height -ImageHeight/2+margin*i, 0X747474);
+                this.drawCenteredString(this.font, knowledge_lines[i-1], (int) (0), height - shifter1 +margin*i, 0X747474);
             }
         }
         if(mode==3){
             for(int i=1;i<=8;i++){
-                this.drawString(this.font, power_lines[i-1], (int) (margin*1.75), height -ImageHeight/2+margin*i, 0X747474);
+                this.drawCenteredString(this.font, power_lines[i-1], (int) (0), height - shifter1 +margin*i, 0X747474);
             }
         }
         if(mode==4){
             for(int i=1;i<=8;i++){
-                this.drawString(this.font, adventure_lines[i-1], (int) (margin*1.75), height -ImageHeight/2+margin*i, 0X747474);
+                this.drawCenteredString(this.font, adventure_lines[i-1], (int) (0), height - shifter1 +margin*i, 0X747474);
             }
         }
         if(mode==5){
             for(int i=1;i<=8;i++){
-                this.drawString(this.font, i_want_ethereal_lines[i-1], (int) (margin*1.75), height -ImageHeight/2+margin*i, 0X747474);
+                this.drawCenteredString(this.font, i_want_ethereal_lines[i-1], (int) (0), height - shifter1 +margin*i, 0X747474);
             }
         }
         super.render(parWidth, parHeight, particle);

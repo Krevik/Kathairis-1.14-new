@@ -3,6 +3,7 @@ package io.github.krevik.kathairis.world.dimension.feature.tree;
 import com.mojang.datafixers.Dynamic;
 import io.github.krevik.kathairis.init.ModBlocks;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.BlockPos;
@@ -33,5 +34,13 @@ public abstract class AbstractKatharianTreeFeature extends AbstractTreeFeature<N
     protected void setDirtAt(IWorldGenerationReader worldIn, BlockPos pos, BlockPos origin) {
         worldIn.setBlockState(pos,ModBlocks.KATHAIRIS_DIRT.getDefaultState(),3);
     }
+
+    protected boolean isWillowVineMain(IWorldGenerationBaseReader p_214587_0_, BlockPos p_214587_1_) {
+        return p_214587_0_.hasBlockState(p_214587_1_, (p_214573_0_) -> {
+            Block block = p_214573_0_.getBlock();
+            return block== ModBlocks.WILLOW_VINE_MAIN;
+        });
+    }
+
 
 }

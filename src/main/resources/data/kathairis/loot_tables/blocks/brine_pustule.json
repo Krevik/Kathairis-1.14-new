@@ -14,7 +14,7 @@
                   "condition": "minecraft:block_state_property",
                   "block": "kathairis:brine_pustule",
                   "properties": {
-                    "age": "1"
+                    "stage": "1"
                   }
                 }
               ],
@@ -52,7 +52,7 @@
           "condition": "minecraft:block_state_property",
           "block": "kathairis:mineral_fruit",
           "properties": {
-            "age": "1"
+            "stage": "1"
           }
         }
       ]

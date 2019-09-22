@@ -338,9 +338,14 @@ public class BasicKatharianParticle extends SpriteTexturedParticle implements IP
         return this;
     }
 
-    @Override
+    /*@Override
     public ParticleType<?> getType() {
         return ModParticles.FAST_PARTICLE;
+    }*/
+
+    @Override
+    public ParticleType<?> getType() {
+        return null;
     }
 
     @Override

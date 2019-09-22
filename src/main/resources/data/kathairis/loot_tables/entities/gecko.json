@@ -1,13 +1,13 @@
 {
     "pools": [
         {
-			"name": "kathairis:gooseberry",
+			"name": "kathairis:gooseberries",
             "rolls": 1,
             "entries": [
                 {
                     "type": "item",
                     "weight": 1,
-                    "name": "kathairis:gooseberry",
+                    "name": "kathairis:gooseberries",
                     "functions": [
                         {
                             "function": "set_count",

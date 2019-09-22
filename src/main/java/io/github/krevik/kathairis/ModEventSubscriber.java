@@ -1,6 +1,10 @@
 package io.github.krevik.kathairis;
 
 import io.github.krevik.kathairis.block.*;
+import io.github.krevik.kathairis.block.TreesForSaplings.ElderwillowTree;
+import io.github.krevik.kathairis.block.TreesForSaplings.MysticTree;
+import io.github.krevik.kathairis.block.TreesForSaplings.ShinyTree;
+import io.github.krevik.kathairis.block.TreesForSaplings.SoulTree;
 import io.github.krevik.kathairis.enchantement.KathairisEnchantments;
 import io.github.krevik.kathairis.entity.*;
 import io.github.krevik.kathairis.entity.butterfly.*;
@@ -15,8 +19,11 @@ import io.github.krevik.kathairis.world.dimension.biome.biomes.*;
 import io.netty.buffer.Unpooled;
 import joptsimple.internal.Strings;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.SaplingBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.particle.IAnimatedSprite;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -26,11 +33,13 @@ import net.minecraft.item.BlockNamedItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Rarity;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.particles.BasicParticleType;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleType;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ModDimension;
@@ -200,8 +209,14 @@ public final class ModEventSubscriber {
 				setup(new BlockKathairisLog(), "elderwillow_log"),
 				setup(new BlockKathairisLeaves(), "elderwillow_leaves"),
 				setup(new BlockPurplePalm(),"purple_palm"),
-				setup(new BlockBrinePustule(), "brine_pustule")
-		);
+				setup(new BlockBrinePustule(), "brine_pustule"),
+				setup(new BlockWillowVineMain(), "willow_vine_main"),
+				setup(new BlockWillowVineTip(), "willow_vine_tip"),
+				setup(new BlockKatharianSapling(new MysticTree()), "mystic_sapling"),
+				setup(new BlockKatharianSapling(new SoulTree()), "soul_sapling"),
+				setup(new BlockKatharianSapling(new ShinyTree()), "shiny_sapling"),
+				setup(new BlockKatharianSapling(new ElderwillowTree()), "elderwillow_sapling")
+				);
 
 	}
 
@@ -403,6 +418,12 @@ public final class ModEventSubscriber {
 				setup(KathairisEnchantments.ENCHANTMENT_ETHEREAL,"ethereal")
 		);
 	}
+
+	@SubscribeEvent
+	public static void onRegisterParticleTypes(final RegistryEvent.Register<ParticleType<?>> event){
+		//ModParticles.registerParticles();
+	}
+
 
 	@SubscribeEvent
 	public static void onRegisterEntityTypes(final RegistryEvent.Register<EntityType<?>> event){

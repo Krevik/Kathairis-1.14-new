@@ -14,18 +14,16 @@ import net.minecraftforge.registries.ObjectHolder;
 
 import static io.github.krevik.kathairis.util.ModReference.MOD_ID;
 
-
+@ObjectHolder(MOD_ID)
 public class ModParticles {
-    public static BasicParticleType FAST_PARTICLE = ModUtil._null();
+    public static BasicParticleType TEST = ModUtil._null();
 
     public static void registerParticles(){
-        FAST_PARTICLE = register("fast_particle",false);
+        TEST=register("portal",true);
     }
 
-    public static BasicParticleType register(String name, boolean alwaysShow) {
-        return (BasicParticleType) Registry.<ParticleType<? extends IParticleData>>register(Registry.PARTICLE_TYPE, new ResourceLocation(MOD_ID,name), new BasicParticleType(alwaysShow));
+    private static BasicParticleType register(String key, boolean alwaysShow) {
+        return (BasicParticleType)Registry.<ParticleType<? extends IParticleData>>register(Registry.PARTICLE_TYPE, (MOD_ID+":"+key), new BasicParticleType(alwaysShow));
     }
-
-
 
 }
