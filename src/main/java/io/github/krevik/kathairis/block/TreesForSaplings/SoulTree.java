@@ -1,5 +1,6 @@
 package io.github.krevik.kathairis.block.TreesForSaplings;
 
+import io.github.krevik.kathairis.world.dimension.feature.tree.FeatureKatharianSoulTree;
 import io.github.krevik.kathairis.world.dimension.feature.tree.FeatureKatharianTallTree1;
 import io.github.krevik.kathairis.world.dimension.feature.tree.FeatureKatharianTallTree2;
 import io.github.krevik.kathairis.world.dimension.feature.tree.FeatureKatharianTreeHuge1;
@@ -15,6 +16,6 @@ public class SoulTree extends Tree {
     @Nullable
     @Override
     protected AbstractTreeFeature<NoFeatureConfig> getTreeFeature(Random random) {
-        return null;
+        return new FeatureKatharianSoulTree(NoFeatureConfig::deserialize);
     }
 }
